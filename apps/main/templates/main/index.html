@@ -1,0 +1,321 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>SIMEC</title>
+{% endblock title %}
+
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Red de Estaciones Meteoceanográficas - REMO</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item active"><a href="{% url 'index' %}">Inicio</a></li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- /.col -->
+        <div class="card">
+          <div class="card-header p-2">
+            <ul class="nav nav-pills">
+              <li class="nav-item"><a class="nav-link active" href="#general" data-toggle="tab">General</a></li>
+              <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Salidas de campo</a></li>
+              <li class="nav-item"><a class="nav-link" href="#calendario" data-toggle="tab">XXs</a></li>
+            </ul>
+          </div><!-- /.card-header -->
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="active tab-pane" id="general">
+                <!-- Post -->
+                <section class="content">
+                  <div class="container-fluid">
+                    <!-- Small boxes (Stat box) -->
+                    <div class="row">
+                      <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                          <div class="inner">
+                            <h3>{{ estaciones_list|length }}</h3>
+
+                            <p>Estaciones</p>
+                          </div>
+                          <div class="icon">
+                            <i class="fas fa-broadcast-tower"></i>
+                          </div>
+                          <a href="" class="small-box-footer">Más información <i
+                              class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                      </div>
+                      <!-- ./col -->
+                      <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                          <div class="inner">
+                            <h3>{{ sensores_estacion_list|length }}</h3>
+
+                            <p>Sensores</p>
+                          </div>
+                          <div class="icon">
+                            <i class="fas fa-cloud-sun-rain"></i>
+                          </div>
+                          <a href="" class="small-box-footer">Más información <i
+                              class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                      </div>
+                      <!-- ./col -->
+                      <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                          <div class="inner">
+                            <h3>{{ componentes_estacion_list|length }}</h3>
+
+                            <p>Componentes</p>
+                          </div>
+                          <div class="icon">
+                            <i class="fas fa-tools"></i>
+                          </div>
+                          <a href="" class="small-box-footer">Más información <i
+                              class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                      </div>
+                      <!-- ./col -->
+                      <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                          <div class="inner">
+                            <h3>{{ salida_de_campo_list|length }}</h3>
+
+                            <p>Salidas a campo</p>
+                          </div>
+                          <div class="icon">
+                            <i class="fas fa-hiking"></i>
+                          </div>
+                          <a href="" class="small-box-footer">Más información <i
+                              class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                      </div>
+                      <!-- ./col -->
+                    </div>
+                    <!-- /.row -->
+                    <!-- Main row -->
+                    <div class="row">
+                      <!-- Left col -->
+                      <section class="col-lg-7 connectedSortable">
+                        <!-- Custom tabs (Charts with tabs)-->
+                        <!-- Calendar -->
+                        <div class="card">
+                          <div class="card-header border-0">
+
+                            <h3 class="card-title">
+                              <i class="far fa-calendar-alt"></i>
+                              Calendario
+                            </h3>
+                            <!-- tools card -->
+                            <div class="card-tools">
+                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                              </button>
+                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                              </button>
+                            </div>
+                            <!-- /. tools -->
+                          </div>
+                          <!-- /.card-header -->
+                          <div class="card-body pt-0">
+                            <!--The calendar -->
+                            <div id="external-events">
+                              <div id="calendar" style="width: 100%"></div>
+                            </div>
+                          </div>
+                          <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+
+                        <div class="card card-primary">
+                          <div class="card-header">
+                            <h4 class="card-title">Imágenes</h4>
+                            <!-- tools card -->
+                            <div class="card-tools">
+                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                              </button>
+                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                              </button>
+                            </div>
+                            <!-- /. tools -->
+                          </div>
+
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-sm-2">
+                                <a href="{% static 'img/E_Puerto_Bolivar.jpg' %}" data-toggle="lightbox"
+                                  data-title="Estación meteorológica" data-gallery="gallery">
+                                  <img src="{% static 'img/E_Puerto_Bolivar.jpg' %}" alt="white sample"
+                                    class="img-fluid mb-2">
+
+                                </a>
+                              </div>
+                              <div class="col-sm-2">
+                                <a href="https://via.placeholder.com/1200/000000.png?text=2" data-toggle="lightbox"
+                                  data-title="sample 2 - black" data-gallery="gallery">
+                                  <img src="https://via.placeholder.com/300/000000?text=2" class="img-fluid mb-2"
+                                    alt="black sample" />
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </section>
+                      <!-- /.Left col -->
+                      <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                      <section class="col-lg-5 connectedSortable">
+
+                        <!-- Map card -->
+                        <div class="card bg-gradient-primary">
+                          <div class="card-header border-0">
+                            <h3 class="card-title">
+                              <i class="fas fa-map-marker-alt mr-1"></i>
+                              Geolocalización
+                            </h3>
+                            <!-- card tools -->
+                            <div class="card-tools">
+                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse"
+                                title="Collapse">
+                                <i class="fas fa-minus"></i>
+                              </button>
+                            </div>
+                            <!-- /.card-tools -->
+                          </div>
+                          <div class="card-body">
+                            <div id="geovisor_estaciones" style="height: 250px; width: 100%;"></div>
+                          </div>
+                          <!-- /.card-body-->
+                        </div>
+                        <!-- /.card -->
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">
+                              <i class="fas fa-chart-pie mr-1"></i>
+                              Gráficas
+                            </h3>
+                            <div class="card-tools">
+                              <ul class="nav nav-pills ml-auto">
+                                <li class="nav-item">
+                                  <a class="nav-link active" href="#revenue-chart" data-toggle="tab">Area</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#sales-chart" data-toggle="tab">Línea</a>
+                                </li>
+                              </ul>
+                            </div>
+                          </div><!-- /.card-header -->
+                          <div class="card-body">
+                            <div class="tab-content p-0">
+                              <!-- Morris chart - Sales -->
+                              <div class="chart tab-pane active" id="revenue-chart"
+                                style="position: relative; height: 300px;">
+                                <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
+                              </div>
+                              <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
+                                <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
+                              </div>
+                            </div>
+                          </div><!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+                      </section>
+                      <!-- right col -->
+                    </div>
+                    <!-- /.row (main row) -->
+                  </div><!-- /.container-fluid -->
+                </section>
+                <!-- /.post -->
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="timeline">
+                <!-- The timeline -->
+                <div class="timeline timeline-inverse">
+                  {% if salida_de_campo_list %}
+                  {% for salida_de_campo in salida_de_campo_list %}
+                  <!-- timeline time label -->
+                  <div class="time-label">
+                    <span class="bg-{{ salida_de_campo.tipo_de_salida.color }}">
+                      {{ salida_de_campo.fecha }}
+                    </span>
+                  </div>
+                  <!-- /.timeline-label -->
+                  <!-- timeline item -->
+                  <div>
+                    <i
+                      class="{{ salida_de_campo.tipo_de_salida.simbolo }} bg-{{ salida_de_campo.tipo_de_salida.color2 }}"></i>
+
+                    <div class="timeline-item">
+
+                      <h3 class="timeline-header"><a href="{{ salida_de_campo.estacion.get_absolute_url }}">
+                          {{ salida_de_campo.estacion }}</a> {{ salida_de_campo.tipo_de_salida.tipo }}
+                      </h3>
+
+                      <div class="timeline-body">
+                        {{ salida_de_campo.observaciones }}
+                      </div>
+                    </div>
+                  </div>
+                  <!-- END timeline item -->
+                  {% endfor %}
+                  {% else %}
+                  <div>
+                    <div class="timeline-item">
+                      <h3 class="timeline-header"><b>No hay salidas de campo</b></h3>
+                    </div>
+                  </div>
+                  {% endif %}
+
+                  <div>
+                    <i class="far fa-clock bg-gray"></i>
+                  </div>
+
+
+                </div>
+              </div>
+              <!-- /.tab-pane -->
+
+              <div class="tab-pane" id="calendario">
+
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div><!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+{% endblock content %}
+{% block script %}
+<!-- Geovisor -->
+{% endblock script %}
