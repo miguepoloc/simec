@@ -12,7 +12,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Red de Estaciones Meteoceanográficas - REMO</h1>
+          <h1>Sistema Integrado de Médico en tu Casa - SIMEC</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -31,9 +31,9 @@
         <div class="card">
           <div class="card-header p-2">
             <ul class="nav nav-pills">
-              <li class="nav-item"><a class="nav-link active" href="#general" data-toggle="tab">General</a></li>
+              <li class="nav-item" style="color: orange;"><a class="nav-link active" href="#general" data-toggle="tab">General</a></li>
               <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Salidas de campo</a></li>
-              <li class="nav-item"><a class="nav-link" href="#calendario" data-toggle="tab">XXs</a></li>
+              <!-- <li class="nav-item"><a class="nav-link" href="#calendario" data-toggle="tab">XXs</a></li> -->
             </ul>
           </div><!-- /.card-header -->
           <div class="card-body">
@@ -50,10 +50,10 @@
                           <div class="inner">
                             <h3>{{ estaciones_list|length }}</h3>
 
-                            <p>Estaciones</p>
+                            <p>Equipos</p>
                           </div>
                           <div class="icon">
-                            <i class="fas fa-broadcast-tower"></i>
+                            <i class="fas fa-users"></i>
                           </div>
                           <a href="" class="small-box-footer">Más información <i
                               class="fas fa-arrow-circle-right"></i></a>
@@ -66,10 +66,10 @@
                           <div class="inner">
                             <h3>{{ sensores_estacion_list|length }}</h3>
 
-                            <p>Sensores</p>
+                            <p>Zonas</p>
                           </div>
                           <div class="icon">
-                            <i class="fas fa-cloud-sun-rain"></i>
+                            <i class="fas fa-map-marked-alt"></i>
                           </div>
                           <a href="" class="small-box-footer">Más información <i
                               class="fas fa-arrow-circle-right"></i></a>
@@ -125,10 +125,10 @@
                             </h3>
                             <!-- tools card -->
                             <div class="card-tools">
-                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse">
+                              <button type="button" class="btn btn-orange btn-sm" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
                               </button>
-                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="remove">
+                              <button type="button" class="btn btn-orange btn-sm" data-card-widget="remove">
                                 <i class="fas fa-times"></i>
                               </button>
                             </div>
@@ -146,15 +146,15 @@
                         <!-- /.card -->
 
 
-                        <div class="card card-primary">
+                        <div class="card card-orange">
                           <div class="card-header">
                             <h4 class="card-title">Imágenes</h4>
                             <!-- tools card -->
                             <div class="card-tools">
-                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse">
+                              <button type="button" class="btn btn-orange btn-sm" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
                               </button>
-                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="remove">
+                              <button type="button" class="btn btn-orange btn-sm" data-card-widget="remove">
                                 <i class="fas fa-times"></i>
                               </button>
                             </div>
@@ -188,7 +188,7 @@
                       <section class="col-lg-5 connectedSortable">
 
                         <!-- Map card -->
-                        <div class="card bg-gradient-primary">
+                        <div class="card bg-gradient-orange">
                           <div class="card-header border-0">
                             <h3 class="card-title">
                               <i class="fas fa-map-marker-alt mr-1"></i>
@@ -196,7 +196,7 @@
                             </h3>
                             <!-- card tools -->
                             <div class="card-tools">
-                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse"
+                              <button type="button" class="btn btn-orange btn-sm" data-card-widget="collapse"
                                 title="Collapse">
                                 <i class="fas fa-minus"></i>
                               </button>
