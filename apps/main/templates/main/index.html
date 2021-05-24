@@ -31,7 +31,7 @@
         <div class="card">
           <div class="card-header p-2">
             <ul class="nav nav-pills">
-              <li class="nav-item" style="color: orange;"><a class="nav-link active" href="#general" data-toggle="tab">General</a></li>
+              <li class="nav-item"><a class="nav-link active" href="#general" data-toggle="tab">General</a></li>
               <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Salidas de campo</a></li>
               <!-- <li class="nav-item"><a class="nav-link" href="#calendario" data-toggle="tab">XXs</a></li> -->
             </ul>
@@ -49,7 +49,6 @@
                         <div class="small-box bg-info">
                           <div class="inner">
                             <h3>{{ estaciones_list|length }}</h3>
-
                             <p>Equipos</p>
                           </div>
                           <div class="icon">
@@ -81,11 +80,10 @@
                         <div class="small-box bg-warning">
                           <div class="inner">
                             <h3>{{ componentes_estacion_list|length }}</h3>
-
-                            <p>Componentes</p>
+                            <p>Estadísticas</p>
                           </div>
                           <div class="icon">
-                            <i class="fas fa-tools"></i>
+                            <i class="fas fa-chart-pie"></i>
                           </div>
                           <a href="" class="small-box-footer">Más información <i
                               class="fas fa-arrow-circle-right"></i></a>
@@ -97,7 +95,6 @@
                         <div class="small-box bg-danger">
                           <div class="inner">
                             <h3>{{ salida_de_campo_list|length }}</h3>
-
                             <p>Salidas a campo</p>
                           </div>
                           <div class="icon">
@@ -118,17 +115,16 @@
                         <!-- Calendar -->
                         <div class="card">
                           <div class="card-header border-0">
-
                             <h3 class="card-title">
                               <i class="far fa-calendar-alt"></i>
                               Calendario
                             </h3>
                             <!-- tools card -->
                             <div class="card-tools">
-                              <button type="button" class="btn btn-orange btn-sm" data-card-widget="collapse">
+                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
                               </button>
-                              <button type="button" class="btn btn-orange btn-sm" data-card-widget="remove">
+                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="remove">
                                 <i class="fas fa-times"></i>
                               </button>
                             </div>
@@ -144,23 +140,20 @@
                           <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
-
-
-                        <div class="card card-orange">
+                        <div class="card card-primary">
                           <div class="card-header">
                             <h4 class="card-title">Imágenes</h4>
                             <!-- tools card -->
                             <div class="card-tools">
-                              <button type="button" class="btn btn-orange btn-sm" data-card-widget="collapse">
+                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse">
                                 <i class="fas fa-minus"></i>
                               </button>
-                              <button type="button" class="btn btn-orange btn-sm" data-card-widget="remove">
+                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="remove">
                                 <i class="fas fa-times"></i>
                               </button>
                             </div>
                             <!-- /. tools -->
                           </div>
-
                           <div class="card-body">
                             <div class="row">
                               <div class="col-sm-2">
@@ -168,7 +161,6 @@
                                   data-title="Estación meteorológica" data-gallery="gallery">
                                   <img src="{% static 'img/E_Puerto_Bolivar.jpg' %}" alt="white sample"
                                     class="img-fluid mb-2">
-
                                 </a>
                               </div>
                               <div class="col-sm-2">
@@ -181,14 +173,12 @@
                             </div>
                           </div>
                         </div>
-
                       </section>
                       <!-- /.Left col -->
                       <!-- right col (We are only adding the ID to make the widgets sortable)-->
                       <section class="col-lg-5 connectedSortable">
-
                         <!-- Map card -->
-                        <div class="card bg-gradient-orange">
+                        <div class="card bg-gradient-primary">
                           <div class="card-header border-0">
                             <h3 class="card-title">
                               <i class="fas fa-map-marker-alt mr-1"></i>
@@ -196,7 +186,7 @@
                             </h3>
                             <!-- card tools -->
                             <div class="card-tools">
-                              <button type="button" class="btn btn-orange btn-sm" data-card-widget="collapse"
+                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse"
                                 title="Collapse">
                                 <i class="fas fa-minus"></i>
                               </button>
@@ -266,13 +256,10 @@
                   <div>
                     <i
                       class="{{ salida_de_campo.tipo_de_salida.simbolo }} bg-{{ salida_de_campo.tipo_de_salida.color2 }}"></i>
-
                     <div class="timeline-item">
-
                       <h3 class="timeline-header"><a href="{{ salida_de_campo.estacion.get_absolute_url }}">
                           {{ salida_de_campo.estacion }}</a> {{ salida_de_campo.tipo_de_salida.tipo }}
                       </h3>
-
                       <div class="timeline-body">
                         {{ salida_de_campo.observaciones }}
                       </div>
@@ -287,18 +274,13 @@
                     </div>
                   </div>
                   {% endif %}
-
                   <div>
                     <i class="far fa-clock bg-gray"></i>
                   </div>
-
-
                 </div>
               </div>
               <!-- /.tab-pane -->
-
               <div class="tab-pane" id="calendario">
-
               </div>
               <!-- /.tab-pane -->
             </div>
@@ -317,5 +299,4 @@
 
 {% endblock content %}
 {% block script %}
-<!-- Geovisor -->
 {% endblock script %}

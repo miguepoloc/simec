@@ -23,16 +23,16 @@ $("#nueva_salida").click(function () {
     // Estación
     $.ajax({
         type: "POST",
-        url: "/api/Calendario_Salida_De_Campo/",
+        url: "/remo/api/Calendario_Salida_De_Campo/",
         data: {
             "fecha_inicio": fecha_inicio,
             "fecha_fin": fecha_fin,
             "observaciones": document.getElementById('observaciones_estacion').value,
             "estacion": document.getElementById('select_estacion').value,
             "tipo_de_salida": document.getElementById('select_estacion_tipo').value,
-            // "operarios": operarios,
         }
     });
+    location.reload();
 });
 
 function convertir_fecha(fecha) {
@@ -41,3 +41,4 @@ function convertir_fecha(fecha) {
     dia = fecha.slice(8, 10);
     return (nueva_fecha = anio + "-" + mes + "-" + dia);
 }
+

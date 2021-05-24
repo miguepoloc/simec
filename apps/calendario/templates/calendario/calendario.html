@@ -1,0 +1,398 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Calendario | REMO</title>
+{% endblock title %}
+
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Calendario</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="breadcrumb-item active">Calendario</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container">
+      <div id="calendar" class="col-md-12" style="max-width: 1100px; margin: 0 auto;">
+      </div>
+
+      <!-- /.row -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form class="form-horizontal" method="POST" action="api/Calendario_Salida_De_Campo/">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Agregar Salida de Campo</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body">
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label for="estacion" class="control-label">Estación</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <select name="" class="form-control select2" id="select_estacion">
+                        <option value="" selected="selected" disabled="disabled">Selecciona una estación</option>
+                        {% if estaciones_list %}
+                        {% for estacion in estaciones_list %}
+                        <option class="col-sm-2 control-label" value="{{ estacion.id }}">{{ estacion.nombre }}</option>
+                        {% endfor %}
+                        {% endif %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label for="estacion" class="control-label">Tipo de salida</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <select name="" class="form-control select2" id="select_estacion_tipo">
+                        <option selected="selected" disabled="disabled">Selecciona el tipo de salida</option>
+                        {% if tipo_de_salida %}
+                        {% for salida_tipo in tipo_de_salida %}
+                        <option value="{{ salida_tipo.id }}">{{ salida_tipo.tipo }}</option>
+                        {% endfor %}
+                        {% endif %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label for="estacion" class="control-label">Fecha inicial</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input class="form-control" type="date" value="" id="fecha_inicial">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label for="estacion" class="control-label">Fecha final</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input class="form-control" type="date" value="" id="fecha_final">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label for="estacion" class="control-label">Observaciones</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <textarea class="form-control" rows="3" cols="200"
+                        placeholder="Ingrese las actividades que se van a realizar durante la salida de campo"
+                        id="observaciones_estacion"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary swalOK" id="nueva_salida">Guardar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form class="form-horizontal" method="POST">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Modificar Salida de Campo</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body">
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label for="estacion" class="control-label">Estación</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <select name="" class="form-control select2" id="select_estacion_edit">
+                        <option disabled="disabled">Selecciona la estación</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label for="estacion" class="control-label">Tipo de salida</label>
+                    </div>
+                    <div class="col-sm-9">
+                      <select name="" class="form-control select2" id="select_estacion_tipo_edit">
+                        <option disabled="disabled">Selecciona el tipo de salida</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label for="estacion" class="control-label">Fecha inicial</label>
+                    </div>
+                    <div class="col-sm-9" id="inicial_edit">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label for="estacion" class="control-label">Fecha final</label>
+                    </div>
+                    <div class="col-sm-9" id="final_edit">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label for="estacion" class="control-label">Observaciones</label>
+                    </div>
+                    <div class="col-sm-9" id="observaciones_edit">
+                      <textarea class="form-control" rows="3" cols="200"
+                        id="observaciones_estacion_edit">Prueba</textarea>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <button type="button" class="btn btn-dark" id="eliminar_salida">Eliminar Salida</button>
+                </div>
+
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="edit_salida">Guardar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /.container -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock content %}
+
+{% block script %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+    var id_select;
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      // initialDate: '2020-09-12',
+      locale: 'es',
+      // initialView: 'timeGridWeek',
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      },
+      height: 'auto',
+      navLinks: true, // Permite dar click en día o semana para ver esa fecha en específico
+      editable: true,
+      selectable: true,
+      selectMirror: true,
+      nowIndicator: true,
+      businessHours: true, // Cambia de color los fines de semana
+      // Números de las semanas
+      weekNumbers: true,
+      weekNumberCalculation: 'ISO',
+
+
+      eventDrop: function (info) {
+        if (!confirm("¿Estás seguro de hacer este cambio?")) {
+          info.revert();
+          console.log("No se movió");
+        }
+        else {
+          console.log("Movido");
+          $.ajax({
+            type: "PUT",
+            url: "/api/Calendario_Salida_De_Campo/" + info.event.id + "/",
+            data: {
+              "fecha_inicio": info.event.startStr,
+              "fecha_fin": info.event.endStr,
+            }
+          });
+        }
+      },
+
+      select: function (start, end) {
+        $('#ModalAdd').modal('show');
+      },
+      eventClick: function (event, element) {
+        document.getElementById("select_estacion_tipo_edit").innerHTML = '<option disabled="disabled">Selecciona el tipo de salida</option>';
+        document.getElementById("select_estacion_edit").innerHTML = '<option disabled="disabled">Selecciona la estación</option>';
+        id_select = event.event._def.publicId;
+        var lista_calendario = "";
+        var estacion_seleccionada;
+        var tipo_seleccionado;
+        var fecha_inicial;
+        var fecha_final;
+        var observaciones;
+        $.get('/remo/api/Calendario_Salida_De_Campo/', function (result) {
+          lista_calendario = result;
+          console.log("Lista Calendario: ");
+          console.log(lista_calendario);
+          for (let index = 0; index < lista_calendario.length; index++) {
+            if (lista_calendario[index].id == event.event._def.publicId) {
+              estacion_seleccionada = lista_calendario[index].estacion;
+              tipo_seleccionado = lista_calendario[index].tipo_de_salida;
+              fecha_inicial = lista_calendario[index].fecha_inicio;
+              fecha_final = lista_calendario[index].fecha_fin;
+              observaciones = lista_calendario[index].observaciones;
+            }
+          }
+          document.getElementById("inicial_edit").innerHTML = '<input class="form-control" type="date" value="' + fecha_inicial + '" id="fecha_inicial_edit">';
+          document.getElementById("final_edit").innerHTML = '<input class="form-control" type="date" value="' + fecha_final + '" id="fecha_final_edit">';
+          document.getElementById("observaciones_edit").innerHTML = '<textarea class="form-control" rows="3" cols="200" id="observaciones_estacion_edit">' + observaciones + '</textarea>';
+        });
+
+        var lista_estacion = "";
+        $.get('/remo/api/Estacion/', function (result) {
+          lista_estacion = result;
+          console.log("Lista Estación: ");
+          console.log(lista_estacion);
+          for (let index = 0; index < lista_estacion.length; index++) {
+            // Se crea un elemento tipo option
+            let z = document.createElement("option");
+            // Al cual se le asigna el valor de la variable
+            z.setAttribute("value", lista_estacion[index].id);
+            if (lista_estacion[index].id == estacion_seleccionada) {
+              console.log(lista_estacion[index].id);
+              z.setAttribute("selected", "selected");
+            }
+            // Y se le asigna al valor a mostrar
+            let t = document.createTextNode(lista_estacion[index].nombre);
+            z.appendChild(t);
+            // Luego se añade al html
+            document.getElementById("select_estacion_edit").appendChild(z);
+          }
+        });
+
+        var lista_tipo = "";
+        $.get('remo/api/Tipo_Salida_De_Campo/', function (result) {
+
+          lista_tipo = result;
+          console.log("Lista Salida: ");
+          console.log(lista_tipo);
+          for (let index = 0; index < lista_tipo.length; index++) {
+            // Se crea un elemento tipo option
+            let z = document.createElement("option");
+            // Al cual se le asigna el valor de la variable
+            z.setAttribute("value", lista_tipo[index].id);
+            if (lista_tipo[index].id == tipo_seleccionado) {
+              z.setAttribute("selected", "selected");
+            }
+            // Y se le asigna al valor a mostrar
+            let t = document.createTextNode(lista_tipo[index].tipo);
+            z.appendChild(t);
+            // Luego se añade al html
+            document.getElementById("select_estacion_tipo_edit").appendChild(z);
+          }
+        });
+
+        $('#ModalEdit').modal('show');
+
+        $("#edit_salida").click(function () {
+          var fecha_inicio = document.getElementById('fecha_inicial_edit').value;
+          fecha_inicio = convertir_fecha(fecha_inicio);
+          console.log(fecha_inicio);
+          var fecha_fin = document.getElementById('fecha_final_edit').value;
+          fecha_fin = convertir_fecha(fecha_fin);
+          console.log(fecha_fin);
+          // Estación
+          console.log("/remo/api/Calendario_Salida_De_Campo/" + id_select);
+          $.ajax({
+            type: "PUT",
+            url: "/remo/api/Calendario_Salida_De_Campo/" + id_select + "/",
+            data: {
+              "fecha_inicio": fecha_inicio,
+              "fecha_fin": fecha_fin,
+              "observaciones": document.getElementById('observaciones_estacion_edit').value,
+              "estacion": document.getElementById('select_estacion_edit').value,
+              "tipo_de_salida": document.getElementById('select_estacion_tipo_edit').value,
+            }
+          });
+          location.reload();
+        });
+        $("#eliminar_salida").click(function () {
+          $.ajax({
+            type: "DELETE",
+            url: "/remo/api/Calendario_Salida_De_Campo/" + id_select + "/",
+          });
+          location.reload();
+        });
+      },
+
+
+      events: [
+        {% for calendario in calendario_list %}
+          {
+        id: "{{ calendario.id }}",
+        title: "{{ calendario.estacion }}" + " " + '{{ calendario.id }}',
+        start: '{{ calendario.fecha_inicio | date:"Y-m-d" }}',
+        end: '{{ calendario.fecha_fin | date:"Y-m-d" }}',
+        color: "{{ calendario.estacion.color }}",
+      },
+      {% endfor %}
+      ]
+    });
+
+  calendar.render();
+  });
+
+</script>
+{% endblock script %}
