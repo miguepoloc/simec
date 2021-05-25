@@ -17,7 +17,7 @@ $(document).ready(function () {
             }
         }
         var latlng = L.latLng(latitud, longitud);
-        var map = L.map('geovisor', { attributionControl: false }).
+        var map = L.map('map', { attributionControl: false }).
             setView([latitud, longitud],
                 14);
 

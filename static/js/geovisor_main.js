@@ -4,15 +4,17 @@ var latlng = [];
 var marker;
 $(document).ready(function () {
     // var latlng = L.latLng(latitud, longitud);
-    var map = L.map('geovisor_estaciones', { attributionControl: false }).
-        setView([12, -76],
-            5);
+    var map = L.map('map', { attributionControl: false }).
+        setView([10.2, -74.4],
+            7);
 
     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
         maxZoom: 18
     }).addTo(map);
     L.control.scale().addTo(map);
+    L.geoJson(Magdalena_Subregiones).addTo(map);
+
     var boyaIcon = L.icon({
         iconUrl: '/static/img/boya.png',
         // shadowUrl: 'leaf-shadow.png',

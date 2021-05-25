@@ -140,39 +140,6 @@
                           <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
-                        <div class="card card-primary">
-                          <div class="card-header">
-                            <h4 class="card-title">Imágenes</h4>
-                            <!-- tools card -->
-                            <div class="card-tools">
-                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                              </button>
-                              <button type="button" class="btn btn-primary btn-sm" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
-                              </button>
-                            </div>
-                            <!-- /. tools -->
-                          </div>
-                          <div class="card-body">
-                            <div class="row">
-                              <div class="col-sm-2">
-                                <a href="{% static 'img/E_Puerto_Bolivar.jpg' %}" data-toggle="lightbox"
-                                  data-title="Estación meteorológica" data-gallery="gallery">
-                                  <img src="{% static 'img/E_Puerto_Bolivar.jpg' %}" alt="white sample"
-                                    class="img-fluid mb-2">
-                                </a>
-                              </div>
-                              <div class="col-sm-2">
-                                <a href="https://via.placeholder.com/1200/000000.png?text=2" data-toggle="lightbox"
-                                  data-title="sample 2 - black" data-gallery="gallery">
-                                  <img src="https://via.placeholder.com/300/000000?text=2" class="img-fluid mb-2"
-                                    alt="black sample" />
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                       </section>
                       <!-- /.Left col -->
                       <!-- right col (We are only adding the ID to make the widgets sortable)-->
@@ -194,7 +161,7 @@
                             <!-- /.card-tools -->
                           </div>
                           <div class="card-body">
-                            <div id="geovisor_estaciones" style="height: 250px; width: 100%;"></div>
+                            <div id="map" style="height: 250px; width: 100%;"></div>
                           </div>
                           <!-- /.card-body-->
                         </div>
@@ -220,11 +187,26 @@
                             <div class="tab-content p-0">
                               <!-- Morris chart - Sales -->
                               <div class="chart tab-pane active" id="revenue-chart"
-                                style="position: relative; height: 300px;">
-                                <canvas id="revenue-chart-canvas" height="300" style="height: 300px;"></canvas>
+                                style="position: relative;">
+                                <figure class="highcharts-figure">
+                                    <div id="container"></div>
+                                    <p class="highcharts-description">
+                                      Bar chart showing german population distribution by using a mirrored
+                                      horizontal column chart with stacking and two x-axes.
+                                    </p>
+                                  </figure>
+                                
                               </div>
-                              <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;">
-                                <canvas id="sales-chart-canvas" height="300" style="height: 300px;"></canvas>
+                              <div class="chart tab-pane" id="sales-chart" style="position: relative;">
+                                <figure class="highcharts-figure">
+                                  <div id="container2"></div>
+                                  <p class="highcharts-description">
+                                      A basic column chart compares rainfall values between four cities.
+                                      Tokyo has the overall highest amount of rainfall, followed by New York.
+                                      The chart is making use of the axis crosshair feature, to highlight
+                                      months as they are hovered over.
+                                  </p>
+                              </figure>
                               </div>
                             </div>
                           </div><!-- /.card-body -->
@@ -299,4 +281,347 @@
 
 {% endblock content %}
 {% block script %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var calendarEl = document.getElementById('calendar');
+    var id_select;
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      // initialDate: '2020-09-12',
+      locale: 'es',
+      // initialView: 'timeGridWeek',
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      },
+      height: 'auto',
+      navLinks: true, // Permite dar click en día o semana para ver esa fecha en específico
+      editable: true,
+      selectable: true,
+      selectMirror: true,
+      nowIndicator: true,
+      businessHours: true, // Cambia de color los fines de semana
+      // Números de las semanas
+      weekNumbers: true,
+      weekNumberCalculation: 'ISO',
+
+
+      eventDrop: function (info) {
+        if (!confirm("¿Estás seguro de hacer este cambio?")) {
+          info.revert();
+          console.log("No se movió");
+        }
+        else {
+          console.log("Movido");
+          $.ajax({
+            type: "PUT",
+            url: "/api/Calendario_Salida_De_Campo/" + info.event.id + "/",
+            data: {
+              "fecha_inicio": info.event.startStr,
+              "fecha_fin": info.event.endStr,
+            }
+          });
+        }
+      },
+
+      select: function (start, end) {
+        $('#ModalAdd').modal('show');
+      },
+      eventClick: function (event, element) {
+        document.getElementById("select_estacion_tipo_edit").innerHTML = '<option disabled="disabled">Selecciona el tipo de salida</option>';
+        document.getElementById("select_estacion_edit").innerHTML = '<option disabled="disabled">Selecciona la estación</option>';
+        id_select = event.event._def.publicId;
+        var lista_calendario = "";
+        var estacion_seleccionada;
+        var tipo_seleccionado;
+        var fecha_inicial;
+        var fecha_final;
+        var observaciones;
+        $.get('/remo/api/Calendario_Salida_De_Campo/', function (result) {
+          lista_calendario = result;
+          console.log("Lista Calendario: ");
+          console.log(lista_calendario);
+          for (let index = 0; index < lista_calendario.length; index++) {
+            if (lista_calendario[index].id == event.event._def.publicId) {
+              estacion_seleccionada = lista_calendario[index].estacion;
+              tipo_seleccionado = lista_calendario[index].tipo_de_salida;
+              fecha_inicial = lista_calendario[index].fecha_inicio;
+              fecha_final = lista_calendario[index].fecha_fin;
+              observaciones = lista_calendario[index].observaciones;
+            }
+          }
+          document.getElementById("inicial_edit").innerHTML = '<input class="form-control" type="date" value="' + fecha_inicial + '" id="fecha_inicial_edit">';
+          document.getElementById("final_edit").innerHTML = '<input class="form-control" type="date" value="' + fecha_final + '" id="fecha_final_edit">';
+          document.getElementById("observaciones_edit").innerHTML = '<textarea class="form-control" rows="3" cols="200" id="observaciones_estacion_edit">' + observaciones + '</textarea>';
+        });
+
+        var lista_estacion = "";
+        $.get('/remo/api/Estacion/', function (result) {
+          lista_estacion = result;
+          console.log("Lista Estación: ");
+          console.log(lista_estacion);
+          for (let index = 0; index < lista_estacion.length; index++) {
+            // Se crea un elemento tipo option
+            let z = document.createElement("option");
+            // Al cual se le asigna el valor de la variable
+            z.setAttribute("value", lista_estacion[index].id);
+            if (lista_estacion[index].id == estacion_seleccionada) {
+              console.log(lista_estacion[index].id);
+              z.setAttribute("selected", "selected");
+            }
+            // Y se le asigna al valor a mostrar
+            let t = document.createTextNode(lista_estacion[index].nombre);
+            z.appendChild(t);
+            // Luego se añade al html
+            document.getElementById("select_estacion_edit").appendChild(z);
+          }
+        });
+
+        var lista_tipo = "";
+        $.get('remo/api/Tipo_Salida_De_Campo/', function (result) {
+
+          lista_tipo = result;
+          console.log("Lista Salida: ");
+          console.log(lista_tipo);
+          for (let index = 0; index < lista_tipo.length; index++) {
+            // Se crea un elemento tipo option
+            let z = document.createElement("option");
+            // Al cual se le asigna el valor de la variable
+            z.setAttribute("value", lista_tipo[index].id);
+            if (lista_tipo[index].id == tipo_seleccionado) {
+              z.setAttribute("selected", "selected");
+            }
+            // Y se le asigna al valor a mostrar
+            let t = document.createTextNode(lista_tipo[index].tipo);
+            z.appendChild(t);
+            // Luego se añade al html
+            document.getElementById("select_estacion_tipo_edit").appendChild(z);
+          }
+        });
+
+        $('#ModalEdit').modal('show');
+
+        $("#edit_salida").click(function () {
+          var fecha_inicio = document.getElementById('fecha_inicial_edit').value;
+          fecha_inicio = convertir_fecha(fecha_inicio);
+          console.log(fecha_inicio);
+          var fecha_fin = document.getElementById('fecha_final_edit').value;
+          fecha_fin = convertir_fecha(fecha_fin);
+          console.log(fecha_fin);
+          // Estación
+          console.log("/remo/api/Calendario_Salida_De_Campo/" + id_select);
+          $.ajax({
+            type: "PUT",
+            url: "/remo/api/Calendario_Salida_De_Campo/" + id_select + "/",
+            data: {
+              "fecha_inicio": fecha_inicio,
+              "fecha_fin": fecha_fin,
+              "observaciones": document.getElementById('observaciones_estacion_edit').value,
+              "estacion": document.getElementById('select_estacion_edit').value,
+              "tipo_de_salida": document.getElementById('select_estacion_tipo_edit').value,
+            }
+          });
+          location.reload();
+        });
+        $("#eliminar_salida").click(function () {
+          $.ajax({
+            type: "DELETE",
+            url: "/remo/api/Calendario_Salida_De_Campo/" + id_select + "/",
+          });
+          location.reload();
+        });
+      },
+
+
+      events: [
+        {% for calendario in calendario_list %}
+          {
+        id: "{{ calendario.id }}",
+        title: "{{ calendario.estacion }}" + " " + '{{ calendario.id }}',
+        start: '{{ calendario.fecha_inicio | date:"Y-m-d" }}',
+        end: '{{ calendario.fecha_fin | date:"Y-m-d" }}',
+        color: "{{ calendario.estacion.color }}",
+      },
+      {% endfor %}
+      ]
+    });
+
+  calendar.render();
+  });
+
+</script>
+<!-- Geovisor -->
+<script type="text/javascript" src="{% static 'js/geovisor_main.js' %}"></script>
+<script type="text/javascript" src="{% static 'maps/Magdalena_Subregiones.js' %}">
+</script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+  // Data gathered from http://populationpyramid.net/germany/2015/
+
+  // Age categories
+  var categories = [
+    '0-4', '5-9', '10-14', '15-19',
+    '20-24', '25-29', '30-34', '35-39', '40-44',
+    '45-49', '50-54', '55-59', '60-64', '65-69',
+    '70-74', '75-79', '80-84', '85-89', '90-94',
+    '95-99', '100 + '
+  ];
+
+  Highcharts.chart('container', {
+    chart: {
+      type: 'bar'
+    },
+    title: {
+      text: 'Population pyramid for Germany, 2018'
+    },
+    subtitle: {
+      text: 'Source: <a href="http://populationpyramid.net/germany/2018/">Population Pyramids of the World from 1950 to 2100</a>'
+    },
+    accessibility: {
+      point: {
+        valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
+      }
+    },
+    xAxis: [{
+      categories: categories,
+      reversed: false,
+      labels: {
+        step: 1
+      },
+      accessibility: {
+        description: 'Age (male)'
+      }
+    }, { // mirror axis on right side
+      opposite: true,
+      reversed: false,
+      categories: categories,
+      linkedTo: 0,
+      labels: {
+        step: 1
+      },
+      accessibility: {
+        description: 'Age (female)'
+      }
+    }],
+    yAxis: {
+      title: {
+        text: null
+      },
+      labels: {
+        formatter: function () {
+          return Math.abs(this.value) + '%';
+        }
+      },
+      accessibility: {
+        description: 'Percentage population',
+        rangeDescription: 'Range: 0 to 5%'
+      }
+    },
+
+    plotOptions: {
+      series: {
+        stacking: 'normal'
+      }
+    },
+
+    tooltip: {
+      formatter: function () {
+        return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
+          'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) + '%';
+      }
+    },
+
+    series: [{
+      name: 'Male',
+      data: [
+        -2.2, -2.1, -2.2, -2.4,
+        -2.7, -3.0, -3.3, -3.2,
+        -2.9, -3.5, -4.4, -4.1,
+        -3.4, -2.7, -2.3, -2.2,
+        -1.6, -0.6, -0.3, -0.0,
+        -0.0
+      ]
+    }, {
+      name: 'Female',
+      data: [
+        2.1, 2.0, 2.1, 2.3, 2.6,
+        2.9, 3.2, 3.1, 2.9, 3.4,
+        4.3, 4.0, 3.5, 2.9, 2.5,
+        2.7, 2.2, 1.1, 0.6, 0.2,
+        0.0
+      ]
+    }]
+  });
+
+</script>
+<script>
+  Highcharts.chart('container2', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Monthly Average Rainfall'
+    },
+    subtitle: {
+        text: 'Source: WorldClimate.com'
+    },
+    xAxis: {
+        categories: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Rainfall (mm)'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Tokyo',
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+
+    }, {
+        name: 'New York',
+        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+
+    }, {
+        name: 'London',
+        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+
+    }, {
+        name: 'Berlin',
+        data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
+
+    }]
+});
+</script>
 {% endblock script %}
