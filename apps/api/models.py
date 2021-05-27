@@ -60,6 +60,27 @@ class Personal(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(
         max_length=200, help_text="Ingrese el nombre completo")
+    cedula = models.BigIntegerField(blank=True, null=True)
+    telefono = models.BigIntegerField(blank=True, null=True)
+    cargo = models.CharField(max_length=100, blank=True, null=True)
+    correo = models.CharField(max_length=100, blank=True, null=True)
+
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular
+        """
+        return reverse('personal_detail', args=[str(self.id)])
+
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return self.nombre
+
+
+class Equipo(models.Model):
+    id = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=200)
     cargo = models.CharField(max_length=100, blank=True, null=True)
 
     def get_absolute_url(self):
@@ -67,7 +88,6 @@ class Personal(models.Model):
         Devuelve la url para acceder a una instancia particular de MyModelName.
         """
         return reverse('equipo_detail', args=[str(self.id)])
-
 
     def __str__(self):
         """

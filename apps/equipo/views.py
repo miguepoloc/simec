@@ -1,22 +1,22 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import generic
-from ..api.models import Personal, Salidas_De_Campo
+from ..api.models import Equipo, Salidas_De_Campo
 
 
 class EquipoListView(generic.ListView):
-    model = Personal
+    model = Equipo
     # Cantidadd de items a mostrar por página
     paginate_by = 9
     # El nombre con el que se trabajará en la plantilla html
     context_object_name = 'equipo_list'
-    queryset = Personal.objects.order_by('-id')
+    queryset = Equipo.objects.order_by('-id')
     # Especifica la localicación del template
     template_name = 'equipo/equipo_list.html'
 
 
 class EquipoDetailView(generic.DetailView):
-    model = Personal
+    model = Equipo
     template_name = 'equipo/equipo_detail.html'
 
     def get_context_data(self, **kwargs):

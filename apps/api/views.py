@@ -2,8 +2,8 @@ from django.shortcuts import render
 from rest_framework import views, viewsets, mixins
 from rest_framework.response import Response
 from .serializers import (ZonaSerializer, Tipo_Salida_De_CampoSerializer, PersonalSerializer, Salidas_De_CampoSerializer,
-                          Calendario_Salidas_De_CampoSerializer)
-from .models import (Zona, Tipo_Salida_De_Campo, Personal,
+                          Calendario_Salidas_De_CampoSerializer, EquipoSerializer)
+from .models import (Zona, Tipo_Salida_De_Campo, Personal, Equipo,
                      Salidas_De_Campo, Calendario_Salidas_De_Campo)
 
 
@@ -23,6 +23,12 @@ class PersonalViewSet(viewsets.ModelViewSet):
 
     queryset = Personal.objects.all().order_by('id')
     serializer_class = PersonalSerializer
+
+
+class EquipoViewSet(viewsets.ModelViewSet):
+
+    queryset = Equipo.objects.all().order_by('id')
+    serializer_class = EquipoSerializer
 
 
 class Salidas_De_CampoViewSet(viewsets.ModelViewSet):
