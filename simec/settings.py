@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'apps.api',
     'apps.calendario',
     'apps.salidas_de_campo',
+    'apps.estadistica',
+    'apps.equipo'
 ]
 
 MIDDLEWARE = [

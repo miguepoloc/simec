@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Equipos | SIMEC</title>
+{% endblock title %}
+
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Equipos</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="breadcrumb-item active">Equipos</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Default box -->
+    {% if equipo_list %}
+    <div class="card-body pb-0">
+      <div class="row d-flex align-items-stretch">
+        <!-- Nombrar componentes  -->
+        {% for equipo in equipo_list %}
+        <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+          <div class="card bg-light">
+            <div class="card-header text-muted border-bottom-0">
+              <h2 class="lead"><b>{{ equipo.nombre }}</b></h2>
+            </div>
+            <div class="card-body pt-0">
+              <div class="row">
+                <div class="col-7">
+                  <p class="text-muted text-sm"><b>Cargo: </b>{{ equipo.cargo }}</p>
+                </div>
+                <div class="col-5 text-center">
+                  <a href="/static/img/logo.png" data-toggle="lightbox"
+                    data-title="Logo"
+                    data-gallery="Logo">
+                    <img src="/static/img/logo.png"
+                      alt="Logo" class="img-fluid">
+                  </a>
+                </div>
+
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="text-right">
+                <a href="{{ equipo.get_absolute_url }}" class="btn btn-sm btn-primary">
+                  <i class="fas fa-info-circle"></i> Ver más
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% if is_paginated %}
+        <div class="container">
+          <nav aria-label="...">
+            <ul class="pagination justify-content-center">
+
+              {% if page_obj.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="{{ request.path }}?page={{ page_obj.previous_page_number }}"><i
+                    class="fas fa-angle-double-left"></i></a>
+              </li>
+              {% endif %}
+
+              {% for i in paginator.page_range %}
+              {% if page_obj.number == i %}
+              <li class="page-item active"><a class="page-link" href="?page={{i}}">{{ i }}</a></li>
+              {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{i}}">{{ i }}</a></li>
+              {% endif %}
+              {% endfor %}
+
+              {% if page_obj.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="{{ request.path }}?page={{ page_obj.next_page_number }}"><i
+                    class="fas fa-angle-double-right"></i></a>
+              </li>
+              {% endif %}
+            </ul>
+          </nav>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% else %}
+    <p>No hay componentes</p>
+    {% endif %}
+
+
+    <!-- /.card-body -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock content %}
