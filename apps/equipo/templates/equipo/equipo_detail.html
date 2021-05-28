@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-<title>{{ personal.nombre }} | SIMEC</title>
+<title>{{ equipo.nombre }} | SIMEC</title>
 {% endblock title %}
 
 {% block content %}
@@ -12,13 +12,13 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>{{ personal.nombre }}</h1>
+          <h1>{{ equipo.nombre }}</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
             <li class="breadcrumb-item"><a href="{% url 'equipo' %}">Equipo</a></li>
-            <li class="breadcrumb-item active">{{ personal.nombre }}</li>
+            <li class="breadcrumb-item active">{{ equipo.nombre }}</li>
           </ol>
         </div>
       </div>
@@ -32,111 +32,12 @@
     <div class="card card-solid">
       <div class="card-body">
         <div class="row">
-          <div class="col-12 col-sm-6">
-            <div class="list-group">
-              <table class="table table-striped" style="text-align:center;">
-                <thead>
-                  <tr>
-                    <th scope="col">Característica</th>
-                    <th scope="col">Especificación</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row" style="vertical-align:middle;">Cargo</th>
-                    <td>{{ personal.cargo }}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Observaciones</th>
-                    <td>{{ personal.observaciones }}</td>
-                  </tr>
-
-                </tbody>
-              </table>
-
-              <div class="mt-4" style="text-align:center;">
-                <button type="button" class="btn btn-{{ personal.estado.color }}" data-container="body"
-                  data-toggle="popover" data-placement="bottom"
-                  data-content="{{ personal.estado.requerimientos }}">
-                  <i class="{{ personal.estado.simbolo }}"></i>
-                  {{ personal.estado }}
-                </button>
-                <button type="button" class="btn btn-info" data-container="body">
-                  <a href="#" style="color:white;">
-                    <i class="fas fa-file-csv"></i>
-                    CSV
-                  </a>
-                </button>
-                <button type="button" class="btn btn-info" data-container="body">
-                  <a href="#" style="color:white;">
-                    <i class="far fa-file-pdf"></i>
-                    PDF
-                  </a>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6">
-            <nav class="w-100">
-              <div class="nav nav-tabs" id="product-tab" role="tablist">
-                <a class="nav-item nav-link active" id="descripcion-tab" data-toggle="tab" href="#descripcion"
-                  role="tab" aria-controls="descripcion" aria-selected="true">Descripcion</a>
-                <a class="nav-item nav-link" id="timeline-tab" data-toggle="tab" href="#timeline" role="tab"
-                  aria-controls="timeline" aria-selected="false">Salidas de campo</a>
-              </div>
-            </nav>
-            <div class="tab-content p-3 mx-auto" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="descripcion" role="tabpanel" aria-labelledby="descripcion-tab"
-                style="text-align: justify;">
-                {{ personal.descripcion }}
-              </div>
-
-              <div class="tab-pane fade mx-auto" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
-                <!-- The timeline -->
-                <div class="timeline timeline-inverse">
-                  {% if salida_de_campo_list %}
-                  {% for salida_de_campo in salida_de_campo_list %}
-                  <!-- timeline time label -->
-                  <div class="time-label">
-                    <span class="bg-{{ salida_de_campo.tipo_de_salida.color }}">
-                      <a href="{{ salida_de_campo.get_absolute_url }}">
-                        {{ salida_de_campo.fecha }}
-                      </a>
-                    </span>
-                  </div>
-                  <!-- /.timeline-label -->
-                  <!-- timeline item -->
-                  <div>
-                    <i
-                      class="{{ salida_de_campo.tipo_de_salida.simbolo }} bg-{{ salida_de_campo.tipo_de_salida.color2 }}"></i>
-
-                    <div class="timeline-item">
-
-                      <h3 class="timeline-header"><a href="{{ salida_de_campo.sensor.ubicacion.get_absolute_url }}">
-                          {{ salida_de_campo.sensor }}</a> {{ salida_de_campo.tipo_de_salida.tipo }}
-                      </h3>
-
-                      <div class="timeline-body">
-                        {{ salida_de_campo.observaciones }}
-                      </div>
-                    </div>
-                  </div>
-                  <!-- END timeline item -->
-                  {% endfor %}
-                  {% else %}
-                  <div>
-                    <div class="timeline-item">
-                      <h3 class="timeline-header"><b>No hay salidas de campo</b></h3>
-                    </div>
-                  </div>
-                  {% endif %}
-                  <div>
-                    <i class="far fa-clock bg-gray"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <figure class="highcharts-figure">
+            <div id="container"></div>
+            <p class="highcharts-description">
+              Cada equipo atiende 2800 familias y cada auxiliar de enfermería 400 familias
+            </p>
+          </figure>
         </div>
         <!-- /.card-body -->
       </div>
@@ -147,3 +48,138 @@
 </div>
 <!-- /.content-wrapper -->
 {% endblock content %}
+
+{% block script %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/sankey.js"></script>
+<script src="https://code.highcharts.com/modules/organization.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+  Highcharts.chart('container', {
+    chart: {
+      height: 600,
+      inverted: true
+    },
+
+    title: {
+      text: 'Highcharts Org Chart'
+    },
+
+    accessibility: {
+      point: {
+        descriptionFormatter: function (point) {
+          var nodeName = point.toNode.name,
+            nodeId = point.toNode.id,
+            nodeDesc = nodeName === nodeId ? nodeName : nodeName + ', ' + nodeId,
+            parentDesc = point.fromNode.id;
+          return point.index + '. ' + nodeDesc + ', reports to ' + parentDesc + '.';
+        }
+      }
+    },
+
+    series: [{
+      type: 'organization',
+      name: 'Highsoft',
+      keys: ['from', 'to'],
+      data: [
+        ['Shareholders', 'Board'],
+        ['Board', 'CEO'],
+        ['CEO', 'CTO'],
+        ['CEO', 'CPO'],
+        ['CEO', 'CSO'],
+        ['CEO', 'HR'],
+        ['CTO', 'Product'],
+        ['CTO', 'Web'],
+        ['CSO', 'Sales'],
+        ['HR', 'Market'],
+        ['CSO', 'Market'],
+        ['HR', 'Market'],
+        ['CTO', 'Market']
+      ],
+      levels: [{
+        level: 0,
+        color: 'silver',
+        dataLabels: {
+          color: 'black'
+        },
+        height: 25
+      }, {
+        level: 1,
+        color: 'silver',
+        dataLabels: {
+          color: 'black'
+        },
+        height: 25
+      }, {
+        level: 2,
+        color: '#980104'
+      }, {
+        level: 4,
+        color: '#359154'
+      }],
+      nodes: [{
+        id: 'Shareholders'
+      }, {
+        id: 'Board'
+      }, {
+        id: 'CEO',
+        title: 'CEO',
+        name: 'Grethe Hjetland',
+        image: 'https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2020/03/17131126/Highsoft_03862_.jpg'
+      }, {
+        id: 'HR',
+        title: 'HR/CFO',
+        name: 'Anne Jorunn Fjærestad',
+        color: '#007ad0',
+        image: 'https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2020/03/17131210/Highsoft_04045_.jpg'
+      }, {
+        id: 'CTO',
+        title: 'CTO',
+        name: 'Christer Vasseng',
+        image: 'https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2020/03/17131120/Highsoft_04074_.jpg'
+      }, {
+        id: 'CPO',
+        title: 'CPO',
+        name: 'Torstein Hønsi',
+        image: 'https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2020/03/17131213/Highsoft_03998_.jpg'
+      }, {
+        id: 'CSO',
+        title: 'CSO',
+        name: 'Anita Nesse',
+        image: 'https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2020/03/17131156/Highsoft_03834_.jpg'
+      }, {
+        id: 'Product',
+        name: 'Product developers'
+      }, {
+        id: 'Web',
+        name: 'Web devs, sys admin'
+      }, {
+        id: 'Sales',
+        name: 'Sales team'
+      }, {
+        id: 'Market',
+        name: 'Marketing team',
+        column: 5
+      }],
+      colorByPoint: false,
+      color: '#007ad0',
+      dataLabels: {
+        color: 'white'
+      },
+      borderColor: 'white',
+      nodeWidth: 65
+    }],
+    tooltip: {
+      outside: true
+    },
+    exporting: {
+      allowHTML: true,
+      sourceWidth: 800,
+      sourceHeight: 600
+    }
+
+  });
+
+</script>
+{% endblock script %}
