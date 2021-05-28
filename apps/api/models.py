@@ -81,7 +81,28 @@ class Personal(models.Model):
 class Equipo(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=200)
-    cargo = models.CharField(max_length=100, blank=True, null=True)
+    medico = models.ForeignKey(
+        'Personal', on_delete=models.SET_NULL, null=True, blank=True, related_name='medico')
+    enfermero_jefe = models.ForeignKey(
+        'Personal', on_delete=models.SET_NULL, null=True, blank=True, related_name='enfermero_jefe')
+    auxiliar_enfermeria_1 = models.ForeignKey(
+        'Personal', on_delete=models.SET_NULL, null=True, blank=True, related_name='auxiliar_enfermeria1')
+    auxiliar_enfermeria_2 = models.ForeignKey(
+        'Personal', on_delete=models.SET_NULL, null=True, blank=True, related_name='auxiliar_enfermeria2')
+    auxiliar_enfermeria_3 = models.ForeignKey(
+        'Personal', on_delete=models.SET_NULL, null=True, blank=True, related_name='auxiliar_enfermeria3')
+    auxiliar_enfermeria_4 = models.ForeignKey(
+        'Personal', on_delete=models.SET_NULL, null=True, blank=True, related_name='auxiliar_enfermeria4')
+    auxiliar_enfermeria_5 = models.ForeignKey(
+        'Personal', on_delete=models.SET_NULL, null=True, blank=True, related_name='auxiliar_enfermeria5')
+    auxiliar_enfermeria_6 = models.ForeignKey(
+        'Personal', on_delete=models.SET_NULL, null=True, blank=True, related_name='auxiliar_enfermeria6')
+    auxiliar_enfermeria_7 = models.ForeignKey(
+        'Personal', on_delete=models.SET_NULL, null=True, blank=True, related_name='auxiliar_enfermeria7')
+    tecnico_ambiental = models.ForeignKey(
+        'Personal', on_delete=models.SET_NULL, null=True, blank=True, related_name='tecnico_ambiental')
+    psicologo = models.ForeignKey(
+        'Personal', on_delete=models.SET_NULL, null=True, blank=True, related_name='psicologo')
 
     def get_absolute_url(self):
         """

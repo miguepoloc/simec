@@ -34,7 +34,7 @@
         <div class="row">
           <figure class="highcharts-figure">
             <div id="container"></div>
-            <p class="highcharts-description">
+            <p class="highcharts-description" style="width: 100vw;">
               Cada equipo atiende 2800 familias y cada auxiliar de enfermería 400 familias
             </p>
           </figure>
@@ -58,12 +58,12 @@
 <script>
   Highcharts.chart('container', {
     chart: {
-      height: 600,
+      height: 400,
       inverted: true
     },
 
     title: {
-      text: 'Highcharts Org Chart'
+      text: 'Organización {{ equipo.nombre }}'
     },
 
     accessibility: {
@@ -80,87 +80,94 @@
 
     series: [{
       type: 'organization',
-      name: 'Highsoft',
+      name: '{{ equipo.nombre }}',
       keys: ['from', 'to'],
       data: [
-        ['Shareholders', 'Board'],
-        ['Board', 'CEO'],
-        ['CEO', 'CTO'],
-        ['CEO', 'CPO'],
-        ['CEO', 'CSO'],
-        ['CEO', 'HR'],
-        ['CTO', 'Product'],
-        ['CTO', 'Web'],
-        ['CSO', 'Sales'],
-        ['HR', 'Market'],
-        ['CSO', 'Market'],
-        ['HR', 'Market'],
-        ['CTO', 'Market']
+        ['Medico', 'EnfermeroJefe'],
+        ['Medico', 'TecnicoAmbiental'],
+        ['Medico', 'Psicologo'],
+        ['EnfermeroJefe', 'Enfermero1'],
+        ['EnfermeroJefe', 'Enfermero2'],
+        ['EnfermeroJefe', 'Enfermero3'],
+        ['EnfermeroJefe', 'Enfermero4'],
+        ['EnfermeroJefe', 'Enfermero5'],
+        ['EnfermeroJefe', 'Enfermero6'],
+        ['EnfermeroJefe', 'Enfermero7'],
+
       ],
       levels: [{
         level: 0,
-        color: 'silver',
-        dataLabels: {
-          color: 'black'
-        },
         height: 25
       }, {
         level: 1,
-        color: 'silver',
-        dataLabels: {
-          color: 'black'
-        },
-        height: 25
+        color: '#4185B3',
       }, {
         level: 2,
-        color: '#980104'
+        color: '#ff6010'
       }, {
-        level: 4,
-        color: '#359154'
-      }],
+        level: 3,
+        color: '#ff6010'
+      },
+      ],
       nodes: [{
-        id: 'Shareholders'
+        id: 'Medico',
+        title: 'Médico',
+        name: 'Ricardo Polo',
+        color: '#48BAB8',
+        image: "{% static 'img/user-md-solid.svg' %}"
       }, {
-        id: 'Board'
+        id: 'EnfermeroJefe',
+        title: 'Enfermero Jefe',
+        name: 'Jesus Barrios',
+        image: "{% static 'img/nurse.svg' %}"
       }, {
-        id: 'CEO',
-        title: 'CEO',
-        name: 'Grethe Hjetland',
-        image: 'https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2020/03/17131126/Highsoft_03862_.jpg'
+        id: 'Enfermero1',
+        title: 'Auxiliar enfermería',
+        name: 'Maria Ramírez',
+        image: "{% static 'img/circulo-cruz.svg' %}"
       }, {
-        id: 'HR',
-        title: 'HR/CFO',
-        name: 'Anne Jorunn Fjærestad',
-        color: '#007ad0',
-        image: 'https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2020/03/17131210/Highsoft_04045_.jpg'
+        id: 'Enfermero2',
+        title: 'Auxiliar enfermería',
+        name: 'Maria Ramírez',
+        image: "{% static 'img/circulo-cruz.svg' %}"
       }, {
-        id: 'CTO',
-        title: 'CTO',
-        name: 'Christer Vasseng',
-        image: 'https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2020/03/17131120/Highsoft_04074_.jpg'
+        id: 'Enfermero3',
+        title: 'Auxiliar enfermería',
+        name: 'Maria Ramírez',
+        image: "{% static 'img/circulo-cruz.svg' %}"
       }, {
-        id: 'CPO',
-        title: 'CPO',
-        name: 'Torstein Hønsi',
-        image: 'https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2020/03/17131213/Highsoft_03998_.jpg'
+        id: 'Enfermero4',
+        title: 'Auxiliar enfermería',
+        name: 'Maria Ramírez',
+        image: "{% static 'img/circulo-cruz.svg' %}",
+        level: 3
       }, {
-        id: 'CSO',
-        title: 'CSO',
-        name: 'Anita Nesse',
-        image: 'https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2020/03/17131156/Highsoft_03834_.jpg'
+        id: 'Enfermero5',
+        title: 'Auxiliar enfermería',
+        name: 'Maria Ramírez',
+        image: "{% static 'img/circulo-cruz.svg' %}",
+        level: 3
       }, {
-        id: 'Product',
-        name: 'Product developers'
+        id: 'Enfermero6',
+        title: 'Auxiliar enfermería',
+        name: 'Maria Ramírez',
+        image: "{% static 'img/circulo-cruz.svg' %}",
+        level: 3
       }, {
-        id: 'Web',
-        name: 'Web devs, sys admin'
+        id: 'Enfermero7',
+        title: 'Auxiliar enfermería',
+        name: 'Maria Ramírez',
+        image: "{% static 'img/circulo-cruz.svg' %}"
       }, {
-        id: 'Sales',
-        name: 'Sales team'
+        id: 'TecnicoAmbiental',
+        title: 'Técnico Ambiental',
+        name: 'Danay Pardo',
+        image: "{% static 'img/mano-agua.svg' %}"
       }, {
-        id: 'Market',
-        name: 'Marketing team',
-        column: 5
+        id: 'Psicologo',
+        title: 'Psicólogo',
+        name: 'Heilen Vargas',
+        image: "{% static 'img/help.svg' %}"
       }],
       colorByPoint: false,
       color: '#007ad0',
@@ -168,7 +175,8 @@
         color: 'white'
       },
       borderColor: 'white',
-      nodeWidth: 65
+      nodeWidth: 65,
+      nodePadding: 10
     }],
     tooltip: {
       outside: true
