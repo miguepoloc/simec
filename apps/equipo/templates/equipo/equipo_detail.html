@@ -50,6 +50,9 @@
 {% endblock content %}
 
 {% block script %}
+<script>
+  document.getElementById("equipos").classList.add('active');
+</script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/sankey.js"></script>
 <script src="https://code.highcharts.com/modules/organization.js"></script>
@@ -58,7 +61,7 @@
 <script>
   Highcharts.chart('container', {
     chart: {
-      height: 400,
+      height: 450,
       inverted: true
     },
 
@@ -112,61 +115,61 @@
       nodes: [{
         id: 'Medico',
         title: 'Médico',
-        name: 'Ricardo Polo',
+        name: '{{ equipo.medico }}',
         color: '#48BAB8',
         image: "{% static 'img/user-md-solid.svg' %}"
       }, {
         id: 'EnfermeroJefe',
         title: 'Enfermero Jefe',
-        name: 'Jesus Barrios',
+        name: '{{ equipo.enfermero_jefe }}',
         image: "{% static 'img/nurse.svg' %}"
       }, {
         id: 'Enfermero1',
         title: 'Auxiliar enfermería',
-        name: 'Maria Ramírez',
+        name: '{{ equipo.auxiliar_enfermeria_1 }}',
         image: "{% static 'img/circulo-cruz.svg' %}"
       }, {
         id: 'Enfermero2',
         title: 'Auxiliar enfermería',
-        name: 'Maria Ramírez',
+        name: '{{ equipo.auxiliar_enfermeria_2 }}',
         image: "{% static 'img/circulo-cruz.svg' %}"
       }, {
         id: 'Enfermero3',
         title: 'Auxiliar enfermería',
-        name: 'Maria Ramírez',
+        name: '{{ equipo.auxiliar_enfermeria_3 }}',
         image: "{% static 'img/circulo-cruz.svg' %}"
       }, {
         id: 'Enfermero4',
         title: 'Auxiliar enfermería',
-        name: 'Maria Ramírez',
+        name: '{{ equipo.auxiliar_enfermeria_4 }}',
         image: "{% static 'img/circulo-cruz.svg' %}",
         level: 3
       }, {
         id: 'Enfermero5',
         title: 'Auxiliar enfermería',
-        name: 'Maria Ramírez',
+        name: '{{ equipo.auxiliar_enfermeria_5 }}',
         image: "{% static 'img/circulo-cruz.svg' %}",
         level: 3
       }, {
         id: 'Enfermero6',
         title: 'Auxiliar enfermería',
-        name: 'Maria Ramírez',
+        name: '{{ equipo.auxiliar_enfermeria_6 }}',
         image: "{% static 'img/circulo-cruz.svg' %}",
         level: 3
       }, {
         id: 'Enfermero7',
         title: 'Auxiliar enfermería',
-        name: 'Maria Ramírez',
+        name: '{{ equipo.auxiliar_enfermeria_7 }}',
         image: "{% static 'img/circulo-cruz.svg' %}"
       }, {
         id: 'TecnicoAmbiental',
         title: 'Técnico Ambiental',
-        name: 'Danay Pardo',
+        name: '{{ equipo.tecnico_ambiental }}',
         image: "{% static 'img/mano-agua.svg' %}"
       }, {
         id: 'Psicologo',
         title: 'Psicólogo',
-        name: 'Heilen Vargas',
+        name: '{{ equipo.psicologo }}',
         image: "{% static 'img/help.svg' %}"
       }],
       colorByPoint: false,
@@ -175,11 +178,12 @@
         color: 'white'
       },
       borderColor: 'white',
-      nodeWidth: 65,
+      nodeWidth: 75,
       nodePadding: 10
     }],
     tooltip: {
-      outside: true
+      outside: true,
+      borderColor: "#ff6010"
     },
     exporting: {
       allowHTML: true,

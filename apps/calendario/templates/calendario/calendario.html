@@ -225,7 +225,9 @@
 {% endblock content %}
 
 {% block script %}
-
+<script>
+  document.getElementById("calendario").classList.add('active');
+</script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');

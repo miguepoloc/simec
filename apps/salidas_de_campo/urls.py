@@ -6,7 +6,7 @@ from . import views
 
 urlpatterns = [
     # url(r'^$', views.Salidas_De_CampoListView.as_view(), name='salidas_de_campo'),
-    # url(r'formulario', views.Salidas_De_CampoForm, name='salidas_de_campo_form'),
+    url(r'^$', views.Salidas_De_CampoForm, name='salidas_de_campo'),
     # # url(r'^$', views.Salidas_De_CampoForm.as_view(), name='salidas_de_campo_form'),
     # url(r'^(?P<pk>\d+)$', views.Salidas_De_CampoDetailView.as_view(),
     #     name='salidas_de_campo_detail'),

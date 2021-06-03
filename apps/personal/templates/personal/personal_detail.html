@@ -68,8 +68,7 @@
 
               <div class="mt-4" style="text-align:center;">
                 <button type="button" class="btn btn-{{ personal.estado.color }}" data-container="body"
-                  data-toggle="popover" data-placement="bottom"
-                  data-content="{{ personal.estado.requerimientos }}">
+                  data-toggle="popover" data-placement="bottom" data-content="{{ personal.estado.requerimientos }}">
                   <i class="{{ personal.estado.simbolo }}"></i>
                   {{ personal.estado }}
                 </button>
@@ -159,3 +158,9 @@
 </div>
 <!-- /.content-wrapper -->
 {% endblock content %}
+
+{% block script %}
+<script>
+  document.getElementById("personal").classList.add('active');
+</script>
+{% endblock script %}

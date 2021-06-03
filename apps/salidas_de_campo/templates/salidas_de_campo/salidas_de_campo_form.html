@@ -1,0 +1,409 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Formulario de Salidas de Campo | SIMEC</title>
+{% endblock title %}
+
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Formato de caracterización social y familiar</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'salidas_de_campo' %}">Salidas de campo</a></li>
+            <li class="breadcrumb-item">Formulario</a></li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Datos iniciales -->
+      <div class="card card-orange">
+        <div class="card-header">
+          <h3 class="card-title" id="nombre_estacion"><i class="fas fa-exclamation-circle"></i> Datos iniciales</h3>
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Número de ficha </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="far fa-id-card"></i>
+                  </span>
+                </div>
+                <input type="text" class="form-control">
+                <div class="input-group-append">
+                </div>
+              </div>
+              <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Fecha de diligenciamiento</label>
+                <div class="form-group row">
+                  <div class="col-12">
+                    <input class="form-control" type="date" value="" id="fecha_salida">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.form-group -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /Datos iniciales -->
+
+      <!-- 1. Identificación del hogar -->
+      <div class="card card-orange">
+        <div class="card-header">
+          <h3 class="card-title" id="nombre_estacion"><i class="fas fa-home"></i> Identificación del hogar</h3>
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="row">
+
+            <div class="col-md-4">
+              <label>Municipio </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                  <select class="form-control select2" style="width: 100%;" required id="select_municipio">
+                    <option value="" selected="selected" disabled="disabled">Seleccione el municipio
+                    </option>
+                    <option value="Nada">Nada</option>
+                    {% if estaciones_list %}
+                    {% for estacion in estaciones_list %}
+                    <option value="{{ estacion.id }}">{{ estacion.nombre }}</option>
+                    {% endfor %}
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label>Corregimiento </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-map-pin"></i></span>
+                  <select class="form-control select2" style="width: 100%;" required id="select_corregimiento">
+                    <option value="" selected="selected" disabled="disabled">Seleccione el corregimiento
+                    </option>
+                    <option value="Nada">Nada</option>
+                    {% if estaciones_list %}
+                    {% for estacion in estaciones_list %}
+                    <option value="{{ estacion.id }}">{{ estacion.nombre }}</option>
+                    {% endfor %}
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-4">
+              <label>Zona </label>
+              <div class="form-group clearfix">
+                <div class="icheck-primary d-inline">
+                  <input type="radio" id="radioPrimary1" name="r1">
+                  <label for="radioPrimary1">
+                    Rural
+                  </label>
+                </div>
+                &nbsp;
+                <div class="icheck-primary d-inline">
+                  <input type="radio" id="radioPrimary2" name="r1">
+                  <label for="radioPrimary2">
+                    Urbano
+                  </label>
+                </div>
+              </div>
+              <!-- /.form-group -->
+            </div>
+            <div class="col-md-12">
+              <label>Dirección </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fas fa-route"></i>
+                  </span>
+                </div>
+                <input type="text" class="form-control">
+                <div class="input-group-append">
+                </div>
+              </div>
+              <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+          </div>
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.1. Identificación del hogar -->
+
+      <!-- 3. Uso de espacios de la vivienda -->
+      <div class="card card-orange">
+        <div class="card-header">
+          <h3 class="card-title" id="nombre_estacion"><i class="fas fa-house-user"></i>Uso de espacios de la vivienda
+          </h3>
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="row">
+
+            <div class="col-md-4">
+              <label>Tipo de vivienda </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-home"></i></span>
+                  <select class="form-control select2" style="width: 100%;" required id="select_tipo">
+                    <option value="" selected="selected" disabled="disabled">Seleccione el tipo de vivienda
+                    </option>
+                    <option value="Nada">Casa</option>
+                    <option value="Nada">Carpa</option>
+                    <option value="Nada">Pieza</option>
+                    <option value="Nada">Refugio</option>
+                    <option value="Nada">Apartamento</option>
+                    <option value="Nada">Institución de adultos y persona mayor</option>
+                    <option value="Nada">Institución de protección niños y adolescentes</option>
+                    <option value="Nada">Centro de reclusión </option>
+                    <option value="Nada">Paga diario </option>
+                    <option value="Nada">Hogar de paso </option>
+                    <option value="Nada">Albergue </option>
+                    <option value="Nada">Otro </option>
+                    {% if estaciones_list %}
+                    {% for estacion in estaciones_list %}
+                    <option value="{{ estacion.id }}">{{ estacion.nombre }}</option>
+                    {% endfor %}
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label>Tenencia de la vivienda </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-file-invoice-dollar"></i></span>
+                  <select class="form-control select2" style="width: 100%;" required id="select_tenencia">
+                    <option value="" selected="selected" disabled="disabled">Seleccione la tenencia de la vivienda
+                    </option>
+                    <option value="Nada">Arriendo</option>
+                    <option value="Nada">Subarriendo</option>
+                    <option value="Nada">Propia</option>
+                    <option value="Nada">Propia pagando</option>
+                    <option value="Nada">Otro </option>
+                    {% if estaciones_list %}
+                    {% for estacion in estaciones_list %}
+                    <option value="{{ estacion.id }}">{{ estacion.nombre }}</option>
+                    {% endfor %}
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label>Nombre de la Institución </label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fas fa-school"></i>
+                  </span>
+                </div>
+                <input type="text" class="form-control">
+                <div class="input-group-append">
+                </div>
+              </div>
+              <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+          </div>
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.1. Identificación del hogar -->
+    </div>
+
+
+
+
+    <div class="col-md-12">
+      <br>
+      <div class="card card-orange" style="text-align: center;">
+        <button type="button" class="btn btn-success swalOK" type="submit" id="agregar">
+          <a href="{% url 'salidas_de_campo' %}" style="text-decoration: none; color: white;">
+            <i class="fas fa-clipboard-check"></i> Agregar salida
+          </a>
+        </button>
+      </div>
+    </div>
+    <!-- /.col (right) -->
+</div>
+
+<!-- /.row -->
+</div>
+<!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock content %}
+
+{% block script %}
+<script>
+  document.getElementById("salidas_de_campo").classList.add('active');
+</script>
+<script src="{% static 'js/salidas_de_campo_form.js' %}"></script>
+
+<script>
+  $(function () {
+
+    var Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
+    });
+
+    $('.swalDefaultSuccess').click(function () {
+      Toast.fire({
+        icon: 'success',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalOK').click(function () {
+      Toast.fire({
+        icon: 'success',
+        title: ' Agregado'
+      })
+    });
+    $('.swalBorrado').click(function () {
+      Toast.fire({
+        icon: 'error',
+        title: 'Borrado'
+      })
+    });
+    $('.swalDefaultError').click(function () {
+      Toast.fire({
+        icon: 'error',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalDefaultWarning').click(function () {
+      Toast.fire({
+        icon: 'warning',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalDefaultQuestion').click(function () {
+      Toast.fire({
+        icon: 'question',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    //Date range picker
+    $('#reservationdate').datetimepicker({
+      format: 'L'
+    });
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'MM/DD/YYYY hh:mm A'
+      }
+    })
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges: {
+          'Today': [moment(), moment()],
+          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate: moment()
+      },
+      function (start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+
+    //Timepicker
+    $('#timepicker').datetimepicker({
+      format: 'LT'
+    })
+
+    //Bootstrap Duallistbox
+    $('.duallistbox').bootstrapDualListbox()
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    $('.my-colorpicker2').on('colorpickerChange', function (event) {
+      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+    })
+
+    $("input[data-bootstrap-switch]").each(function () {
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    })
+
+  })
+</script>
+{% endblock script %}
