@@ -167,10 +167,10 @@
       </div>
       <!-- /.1. Identificación del hogar -->
 
-      <!-- 3. Uso de espacios de la vivienda -->
+      <!-- 3. Entornos del hogar -->
       <div class="card card-orange">
         <div class="card-header">
-          <h3 class="card-title" id="nombre_estacion"><i class="fas fa-house-user"></i>Uso de espacios de la vivienda
+          <h3 class="card-title" id="nombre_estacion"><i class="fas fa-house-user"></i>Entornos del hogar
           </h3>
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -254,23 +254,171 @@
         </div>
         <!-- /.row -->
       </div>
-      <!-- /.1. Identificación del hogar -->
+      <!-- /.3. Entornos del hogar -->
     </div>
 
-
-
-
-    <div class="col-md-12">
-      <br>
-      <div class="card card-orange" style="text-align: center;">
-        <button type="button" class="btn btn-success swalOK" type="submit" id="agregar">
-          <a href="{% url 'salidas_de_campo' %}" style="text-decoration: none; color: white;">
-            <i class="fas fa-clipboard-check"></i> Agregar salida
-          </a>
-        </button>
+    <!-- 4. Uso de espacios de la vivienda -->
+    <div class="card card-orange">
+      <div class="card-header">
+        <h3 class="card-title" id="nombre_estacion"><i class="fas fa-house-user"></i>Uso de espacios de la vivienda
+        </h3>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
       </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <label>Número de habitaciones en el hogar</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-bed"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder="Ingrese el número de habitaciones">
+              <div class="input-group-append">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label>Número de personas en el hogar</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-users"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder="Ingrese el número de personas">
+              <div class="input-group-append">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label>Convivencia con animales</label>
+            <div class="form-group clearfix">
+              <div class="icheck-primary d-inline">
+                <input type="checkbox" id="checkboxPrimary1">
+                <label for="checkboxPrimary1">Perro
+                </label>
+              </div>
+              &nbsp;
+              <div class="icheck-primary d-inline">
+                <input type="checkbox" id="checkboxPrimary2">
+                <label for="checkboxPrimary2">Gato
+                </label>
+              </div>
+              &nbsp;
+              <div class="icheck-primary d-inline">
+                <input type="checkbox" id="checkboxPrimary3">
+                <label for="checkboxPrimary3">Otro
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label>Animales no vacunados contra la rabia </label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-dog"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder="Ingrese el número de perros no vacunados">
+              <div class="input-group-append">
+              </div>
+            </div>
+            <br>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-cat"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder="Ingrese el número de gatos no vacunados">
+              <div class="input-group-append">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-8">
+            <label>Tenencia de animales</label>
+            <div class="form-group clearfix">
+              <div class="icheck-primary d-inline">
+                <input type="checkbox" id="checkboxPrimaryx">
+                <label for="checkboxPrimaryx">Bovinos
+                </label>
+              </div>
+              &nbsp;
+              <div class="icheck-primary d-inline">
+                <input type="checkbox" id="checkboxPrimaryx2">
+                <label for="checkboxPrimaryx2">Porcinos
+                </label>
+              </div>
+              &nbsp;
+              <div class="icheck-primary d-inline">
+                <input type="checkbox" id="checkboxPrimaryx3">
+                <label for="checkboxPrimaryx3">Caprinos
+                </label>
+              </div>
+              &nbsp;
+              <div class="icheck-primary d-inline">
+                <input type="checkbox" id="checkboxPrimary3x">
+                <label for="checkboxPrimary3x">Equinos
+                </label>
+              </div>
+              &nbsp;
+              <div class="icheck-primary d-inline">
+                <input type="checkbox" id="checkboxPrimary3xx">
+                <label for="checkboxPrimary3xx">Ovinos
+                </label>
+              </div>
+              &nbsp;
+              <div class="icheck-primary d-inline">
+                <input type="checkbox" id="checkboxPrimary3q">
+                <label for="checkboxPrimary3q">Especies menores
+                </label>
+              </div>
+              &nbsp;
+              <div class="icheck-primary d-inline">
+                <input type="checkbox" id="checkboxPrimary3w">
+                <label for="checkboxPrimary3w">Animales exóticos
+                </label>
+              </div>
+              &nbsp;
+              <div class="icheck-primary d-inline">
+                <input type="checkbox" id="checkboxPrimary3aw">
+                <label for="checkboxPrimary3aw">Otros
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- /.col -->
+        </div>
+      </div>
+      <!-- /.row -->
     </div>
-    <!-- /.col (right) -->
+    <!-- /.4. Uso de espacios de la vivienda -->
+</div>
+
+
+
+<div class="col-md-12">
+  <br>
+  <div class="card card-orange" style="text-align: center;">
+    <button type="button" class="btn btn-success swalOK" type="submit" id="agregar">
+      <a href="{% url 'salidas_de_campo' %}" style="text-decoration: none; color: white;">
+        <i class="fas fa-clipboard-check"></i> Agregar salida
+      </a>
+    </button>
+  </div>
+</div>
+<!-- /.col (right) -->
 </div>
 
 <!-- /.row -->
