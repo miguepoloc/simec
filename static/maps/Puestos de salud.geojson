@@ -1,0 +1,16 @@
+{
+"type": "FeatureCollection",
+"name": "Puestos de salud",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4978" } },
+"features": [
+{ "type": "Feature", "properties": { "Nombre": "Puesto de salud Cordobita" }, "geometry": null },
+{ "type": "Feature", "properties": { "Nombre": "Puesto de salud Sevillano" }, "geometry": null },
+{ "type": "Feature", "properties": { "Nombre": "Puesto de salud Palmor" }, "geometry": null },
+{ "type": "Feature", "properties": { "Nombre": "Puesto de salud" }, "geometry": null },
+{ "type": "Feature", "properties": { "Nombre": "Puesto de salud" }, "geometry": null },
+{ "type": "Feature", "properties": { "Nombre": "Hospital San Cristobal" }, "geometry": { "type": "Point", "coordinates": [ 1700033.066057985881343, -6026187.884121196344495 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Puesto de salud Miramar" }, "geometry": { "type": "Point", "coordinates": [ 1699202.989400618476793, -6026437.665958075784147 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Puesto de salud Nelson Pérez" }, "geometry": { "type": "Point", "coordinates": [ 1700294.531038411194459, -6026498.595885723829269 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Puesto de salud Marceliano Brugés" }, "geometry": { "type": "Point", "coordinates": [ 1700993.371648657368496, -6026050.394146137870848 ] } }
+]
+}

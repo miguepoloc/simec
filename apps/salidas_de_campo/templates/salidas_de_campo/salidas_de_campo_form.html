@@ -431,8 +431,22 @@
 {% endblock content %}
 
 {% block script %}
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script>
   document.getElementById("salidas_de_campo").classList.add('active');
+  // Obtener las coordenadas
+  if (navigator.geolocation) {
+    var success = function (position) {
+      var latitud = position.coords.latitude,
+        longitud = position.coords.longitude;
+      console.log(latitud);
+      console.log(longitud);
+    }
+    navigator.geolocation.getCurrentPosition(success, function (msg) {
+      console.error(msg);
+    });
+
+  }
 </script>
 <script src="{% static 'js/salidas_de_campo_form.js' %}"></script>
 

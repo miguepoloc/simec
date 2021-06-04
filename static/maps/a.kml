@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="a" id="a">
+	<SimpleField name="Nombre" type="string"></SimpleField>
+</Schema>
+<Folder><name>a</name>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#a">
+		<SimpleData name="Nombre">Puesto de salud Cordobita</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>0,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#a">
+		<SimpleData name="Nombre">Puesto de salud Sevillano</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>0,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#a">
+		<SimpleData name="Nombre">Puesto de salud Palmor</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>0,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#a">
+		<SimpleData name="Nombre">Puesto de salud</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>0,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#a">
+		<SimpleData name="Nombre">Puesto de salud</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>0,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#a">
+		<SimpleData name="Nombre">Hospital San Cristobal</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-74.2458403342583,11.0152431303071</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#a">
+		<SimpleData name="Nombre">Puesto de salud Miramar</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-74.2537713020009,11.0145293917023</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#a">
+		<SimpleData name="Nombre">Puesto de salud Nelson Pérez</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-74.2443096892865,10.9977214603219</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#a">
+		<SimpleData name="Nombre">Puesto de salud Marceliano Brugés</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-74.2370416027075,11.0091624404886</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>
