@@ -799,7 +799,6 @@
               </div>
             </div>
           </div>
-
           <div class="col-md-6">
             <label>¿Cuál?</label>
             <div class="input-group">
@@ -818,6 +817,192 @@
       <!-- /.row -->
     </div>
     <!-- /.6. Otras características de la familia -->
+
+    <!-- 7. Tipo de familia y características de los miembros de la familia -->
+    <div class="card card-orange">
+      <div class="card-header">
+        <h3 class="card-title" id="nombre_estacion"><i class="fas fa-user-check"></i>&nbsp; Tipo de familia y
+          características de los miembros de la familia
+        </h3>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <div class="row">
+
+          <div class="col-md-4">
+            <label>Tipo de familia </label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-users"></i></span>
+                <select class="form-control select2" style="width: 100%;" required id="select_x">
+                  <option value="" selected="selected" disabled="disabled">Seleccione el tipo de familia
+                  </option>
+                  <option value="Nada">Nuclear</option>
+                  <option value="Nada">Nuclear monoparental</option>
+                  <option value="Nada">Nuclear unipersonal por adulto mayor </option>
+                  <option value="Nada">Extensa </option>
+                  <option value="Nada">Mixta o ampliada </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label>Nombres y apellidos completos
+            </label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fas fa-user"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder="Ingrese el nombre y apellido completo">
+              <div class="input-group-append">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label>Tipo de documento </label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                <select class="form-control select2" style="width: 100%;" required id="select_documento">
+                  <option value="" selected="selected" disabled="disabled">Seleccione el tipo de documento de identidad
+                  </option>
+                  <option value="Nada">Cédula de ciudadanía </option>
+                  <option value="Nada">Registro civil </option>
+                  <option value="Nada">Tarjeta de identidad </option>
+                  <option value="Nada">Cédula de extranjería </option>
+                  <option value="Nada">NUIP </option>
+                  <option value="Nada">SIN ID </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label>Número de documento
+            </label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="far fa-id-card"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder="Ingrese el número de documento">
+              <div class="input-group-append">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Fecha de nacimiento</label>
+              <div class="form-group row">
+                <div class="col-12">
+                  <input class="form-control" type="date" value="" id="fecha_nac">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label>Vínculo familiar con el jefe del hogar</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                <select class="form-control select2" style="width: 100%;" required id="select_documento">
+                  <option value="" selected="selected" disabled="disabled">Seleccione el vínculo familiar</option>
+                  <option value="Nada"> Padre </option>
+                  <option value="Nada">Madre </option>
+                  <option value="Nada">Cónyugue </option>
+                  <option value="Nada">Padrastro </option>
+                  <option value="Nada">Madrastra </option>
+                  <option value="Nada">Abuelo(a)</option>
+                  <option value="Nada">Tío(a)</option>
+                  <option value="Nada">Hermano(a)</option>
+                  <option value="Nada">Hijo(a)</option>
+                  <option value="Nada">Sobrino(a)</option>
+                  <option value="Nada">Otro familiar</option>
+                  <option value="Nada">Otro no pariente</option>
+                  <option value="Nada">Otro miembro no pariente</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label>Sexo</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                <select class="form-control select2" style="width: 100%;" required id="select_documento">
+                  <option value="" selected="selected" disabled="disabled">Seleccione el sexo</option>
+                  <option value="Nada"> Hombre </option>
+                  <option value="Nada">Mujer </option>
+                  <option value="Nada">Intersexual </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label>Género</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                <select class="form-control select2" style="width: 100%;" required id="select_documento">
+                  <option value="" selected="selected" disabled="disabled">Seleccione el género</option>
+                  <option value="Nada"> Másculino </option>
+                  <option value="Nada">Femenino </option>
+                  <option value="Nada">Transgénero </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label>Orientación sexual</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                <select class="form-control select2" style="width: 100%;" required id="select_documento">
+                  <option value="" selected="selected" disabled="disabled">Seleccione la orientación sexual</option>
+                  <option value="Nada"> Homosexual </option>
+                  <option value="Nada">Heterosexual </option>
+                  <option value="Nada">Bisexual </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label>Estado civil</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                <select class="form-control select2" style="width: 100%;" required id="select_documento">
+                  <option value="" selected="selected" disabled="disabled">Seleccione el estado civil</option>
+                  <option value="Nada"> Soltero(a) </option>
+                  <option value="Nada">Casado(a) </option>
+                  <option value="Nada">Unión libre </option>
+                  <option value="Nada"> Separado(a) </option>
+                  <option value="Nada"> Viudo(a) </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.7. Tipo de familia y características de los miembros de la familia -->
 </div>
 
 

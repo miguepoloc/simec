@@ -1,6 +1,11 @@
 from django.contrib import admin
-from .models import (Zona, Tipo_Salida_De_Campo, Personal, Salidas_De_Campo, Calendario_Salidas_De_Campo, Equipo)
+from .models import *
 
+admin.site.register(Tipo_Municipio)
+admin.site.register(Tipo_Centro_Poblado)
+admin.site.register(Departamento)
+admin.site.register(Municipio)
+admin.site.register(Centro_Poblado)
 admin.site.register(Zona)
 admin.site.register(Tipo_Salida_De_Campo)
 admin.site.register(Salidas_De_Campo)

@@ -3,6 +3,14 @@ from rest_framework import routers
 from . import views
 
 router = routers.DefaultRouter()
+router.register(r'Tipo_Municipio',
+                views.Tipo_MunicipioViewSet, "Tipo_Municipio")
+router.register(r'Tipo_Centro_Poblado',
+                views.Tipo_Centro_PobladoViewSet, "Tipo_Centro_Poblado")
+router.register(r'Departamento', views.DepartamentoViewSet, "Departamento")
+router.register(r'Municipio', views.MunicipioViewSet, "Municipio")
+router.register(r'Centro_Poblado',
+                views.Centro_PobladoViewSet, "Centro_Poblado")
 router.register(r'Zona', views.ZonaViewSet, "Zona")
 router.register(r'Tipo_Salida_De_Campo',
                 views.Tipo_Salida_De_CampoViewSet, "Tipo_Salida_De_Campo")

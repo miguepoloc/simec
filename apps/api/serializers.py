@@ -1,6 +1,35 @@
 from rest_framework import serializers
-from .models import (Zona, Tipo_Salida_De_Campo, Personal,
-                     Salidas_De_Campo, Calendario_Salidas_De_Campo, Equipo)
+from .models import *
+
+
+class Tipo_MunicipioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tipo_Municipio
+        fields = '__all__'
+
+
+class Tipo_Centro_PobladoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tipo_Centro_Poblado
+        fields = '__all__'
+
+
+class DepartamentoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Departamento
+        fields = '__all__'
+
+
+class MunicipioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Municipio
+        fields = '__all__'
+
+
+class Centro_PobladoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Centro_Poblado
+        fields = '__all__'
 
 
 class ZonaSerializer(serializers.ModelSerializer):

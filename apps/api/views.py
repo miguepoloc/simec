@@ -1,10 +1,38 @@
 from django.shortcuts import render
 from rest_framework import views, viewsets, mixins
 from rest_framework.response import Response
-from .serializers import (ZonaSerializer, Tipo_Salida_De_CampoSerializer, PersonalSerializer, Salidas_De_CampoSerializer,
-                          Calendario_Salidas_De_CampoSerializer, EquipoSerializer)
-from .models import (Zona, Tipo_Salida_De_Campo, Personal, Equipo,
-                     Salidas_De_Campo, Calendario_Salidas_De_Campo)
+from .serializers import *
+from .models import *
+
+
+class Tipo_MunicipioViewSet(viewsets.ModelViewSet):
+
+    queryset = Tipo_Municipio.objects.all().order_by('id')
+    serializer_class = Tipo_MunicipioSerializer
+
+
+class Tipo_Centro_PobladoViewSet(viewsets.ModelViewSet):
+
+    queryset = Tipo_Centro_Poblado.objects.all().order_by('id')
+    serializer_class = Tipo_Centro_PobladoSerializer
+
+
+class DepartamentoViewSet(viewsets.ModelViewSet):
+
+    queryset = Departamento.objects.all().order_by('codigo_departamento')
+    serializer_class = DepartamentoSerializer
+
+
+class MunicipioViewSet(viewsets.ModelViewSet):
+
+    queryset = Municipio.objects.all().order_by('codigo_municipio')
+    serializer_class = MunicipioSerializer
+
+
+class Centro_PobladoViewSet(viewsets.ModelViewSet):
+
+    queryset = Centro_Poblado.objects.all().order_by('codigo_centro_poblado')
+    serializer_class = Centro_PobladoSerializer
 
 
 class ZonaViewSet(viewsets.ModelViewSet):
