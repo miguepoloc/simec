@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import generic
-from ..api.models import (Personal, Salidas_De_Campo)
+from ..api.models import *
 
 
 # class Salidas_De_CampoListView(generic.ListView):
@@ -32,6 +32,8 @@ def Salidas_De_CampoForm(request):
 
     salidas_de_campo = Salidas_De_Campo.objects.all()
     personal = Personal.objects.all()
+    municipio = Municipio.objects.all()
+    centro_poblado = Centro_Poblado.objects.all()
 
     return render(request, "salidas_de_campo/salidas_de_campo_form.html",
-                  {'salidas_de_campo': salidas_de_campo, 'personal': personal})
+                  {'salidas_de_campo': salidas_de_campo, 'personal': personal, 'municipio': municipio, 'centro_poblado': centro_poblado})

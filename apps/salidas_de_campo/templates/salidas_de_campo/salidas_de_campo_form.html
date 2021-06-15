@@ -96,10 +96,11 @@
                   <select class="form-control select2" style="width: 100%;" required id="select_municipio">
                     <option value="" selected="selected" disabled="disabled">Seleccione el municipio
                     </option>
-                    <option value="Nada">Nada</option>
-                    {% if estaciones_list %}
-                    {% for estacion in estaciones_list %}
-                    <option value="{{ estacion.id }}">{{ estacion.nombre }}</option>
+                    {% if municipio %}
+                    {% for municipios in municipio %}
+                    {% if municipios.departamento.codigo_departamento == 47 %}
+                    <option value="{{ municipios.codigo_municipio }}">{{ municipios.nombre_municipio }}</option>
+                    {% endif %}
                     {% endfor %}
                     {% endif %}
                   </select>
@@ -115,10 +116,11 @@
                   <select class="form-control select2" style="width: 100%;" required id="select_corregimiento">
                     <option value="" selected="selected" disabled="disabled">Seleccione el corregimiento
                     </option>
-                    <option value="Nada">Nada</option>
-                    {% if estaciones_list %}
-                    {% for estacion in estaciones_list %}
-                    <option value="{{ estacion.id }}">{{ estacion.nombre }}</option>
+                    {% if centro_poblado %}
+                    {% for centro_poblados in centro_poblado %}
+                    {% if centro_poblados.departamento.codigo_departamento == 47 %}
+                    <option value="{{ centro_poblados.codigo_centro_poblado }}">{{ centro_poblados.nombre_centro_poblado }} ({{ centro_poblados.municipio }}) </option>
+                    {% endif %}
                     {% endfor %}
                     {% endif %}
                   </select>

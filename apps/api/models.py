@@ -28,7 +28,7 @@ class Tipo_Centro_Poblado(models.Model):
     tipo = models.CharField(
         max_length=200, help_text="Ingrese el tipo de centro poblado")
     color = models.CharField(max_length=100, blank=True, null=True)
-    simbolo = models.CharField(max_length=100)
+    simbolo = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         """
