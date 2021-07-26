@@ -116,7 +116,7 @@
                   <select class="form-control select2" style="width: 100%;" required id="select_corregimiento">
                     <option value="" selected="selected" disabled="disabled">Seleccione el corregimiento
                     </option>
-                    {% if centro_poblado %}
+                    {% if centro_pobladso %}
                     {% for centro_poblados in centro_poblado %}
                     {% if centro_poblados.departamento.codigo_departamento == 47 %}
                     <option value="{{ centro_poblados.codigo_centro_poblado }}">{{ centro_poblados.nombre_centro_poblado }} ({{ centro_poblados.municipio }}) </option>
@@ -1000,6 +1000,46 @@
               </div>
             </div>
           </div>
+
+          <div class="col-md-4">
+            <label>Grupo étnico</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                <select class="form-control select2" style="width: 100%;" required id="select_documento">
+                  <option value="" selected="selected" disabled="disabled">Seleccione el grupo étnico</option>
+                  <option value="Nada"> Indígena </option>
+                  <option value="Nada">ROM- Gitano </option>
+                  <option value="Nada">Raizal </option>
+                  <option value="Nada"> Afrodescendiente </option>
+                  <option value="Nada"> Palenquero </option>
+                  <option value="Nada"> Pueblo Indigena </option>
+                  <option value="Nada"> Ninguna </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label>Discapacidad</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                <select class="form-control select2" style="width: 100%;" required id="select_documento">
+                  <option value="" selected="selected" disabled="disabled">Seleccione la discapacidad</option>
+                  <option value="Nada"> Física                  </option>
+                  <option value="Nada">Auditiva                  </option>
+                  <option value="Nada">Visual                  </option>
+                  <option value="Nada"> Afrodescendiente </option>
+                  <option value="Nada"> Palenquero </option>
+                  <option value="Nada"> Pueblo Indigena </option>
+                  <option value="Nada"> Ninguna </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
         </div>
       </div>
       <!-- /.row -->

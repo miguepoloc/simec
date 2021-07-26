@@ -24,6 +24,7 @@ urlpatterns = [
     path('salidas_de_campo/', include('apps.salidas_de_campo.urls')),
     path('equipos/', include('apps.equipo.urls')),
     path('personal/', include('apps.personal.urls')),
+    path('reporte/', include('apps.reporte.urls')),
     path('api/', include('apps.api.urls')),
     path('admin/', admin.site.urls),
 ]
