@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}
 <title>Reporte | SIMEC</title>
+
 {% endblock title %}
 
 {% block content %}
@@ -31,6 +32,32 @@
     <div class="card-body pb-0">
       <div class="row d-flex align-items-stretch">
 
+        <!-- /.card -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i class="fas fa-chart-pie mr-1"></i>
+              Gráficas
+            </h3>
+
+          </div><!-- /.card-header -->
+          <div class="card-body">
+            <div class="tab-content p-0">
+              <!-- Morris chart - Sales -->
+              <div class="chart tab-pane active" id="revenue-chart" style="position: relative;">
+                <figure class="highcharts-figure">
+                  <div id="container"></div>
+                  <p class="highcharts-description">
+                    Personas atendidas por PIC.
+                  </p>
+                </figure>
+
+              </div>
+            </div>
+          </div><!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
       </div>
     </div>
 
@@ -42,6 +69,101 @@
 <!-- /.content-wrapper -->
 {% endblock content %}
 {% block script %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+  personas = [38, 38, 39, 0, 78, 65, 78, 25, 15, 0, 0, 0, 30, 26, 10, 30, 15, 0, 15, 10, 39, 29, 39, 28, 3, 12, 0, 10, 35];
+  personas_acumulado = [personas[0]];
+  personas.reduce(function (accumulator, currentValue, currentIndex, array) {
+    personas_acumulado.push(accumulator + currentValue);
+    return accumulator + currentValue
+  })
+  for (let i = 0; i < personas.length; i++) {
+
+    // personas_acumulado.splice(i,1,)
+    // push(personas[i] + personas_acumulado[i]);
+  }
+  console.log(personas);
+  console.log(personas_acumulado);
+  Highcharts.chart('container', {
+    chart: {
+      zoomType: 'x'
+    },
+    title: {
+      text: 'Personas atendidas'
+    },
+    subtitle: {
+      text: 'Hospital San Rafael de Fundación'
+    },
+    xAxis: [{
+      categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13',
+        '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29'],
+      crosshair: true
+    }],
+    yAxis: [{ // Primary yAxis
+      labels: {
+        format: '{value} personas',
+        style: {
+          color: Highcharts.getOptions().colors[1]
+        }
+      },
+      title: {
+        text: 'Diario',
+        style: {
+          color: Highcharts.getOptions().colors[1]
+        }
+      }
+    },
+    { // Secondary yAxis
+      title: {
+        text: 'Acumulado',
+        style: {
+          color: Highcharts.getOptions().colors[0]
+        }
+      },
+      labels: {
+        format: '{value} personas',
+        style: {
+          color: Highcharts.getOptions().colors[0]
+        }
+      },
+      opposite: true
+    }],
+    tooltip: {
+      shared: true
+    },
+    // legend: {
+    //   layout: 'vertical',
+    //   align: 'left',
+    //   x: 120,
+    //   verticalAlign: 'top',
+    //   y: 100,
+    //   floating: true,
+    //   backgroundColor:
+    //     Highcharts.defaultOptions.legend.backgroundColor || // theme
+    //     'rgba(255,255,255,0.25)'
+    // },
+    series: [{
+      name: 'Acumulado',
+      type: 'column',
+      yAxis: 1,
+      data: personas_acumulado,
+      tooltip: {
+        valueSuffix: ' personas'
+      }
+
+    }, {
+      name: 'Diario',
+      type: 'spline',
+      data: personas,
+      tooltip: {
+        valueSuffix: ' personas'
+      }
+    }]
+  });
+</script>
 <script>
   document.getElementById("reporte").classList.add('active');
 </script>

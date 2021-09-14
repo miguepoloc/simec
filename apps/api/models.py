@@ -21,6 +21,7 @@ class Tipo_Municipio(models.Model):
         """
         return self.tipo
 
+
 class Tipo_Centro_Poblado(models.Model):
     id = models.AutoField(primary_key=True)
     codigo = models.CharField(
@@ -304,3 +305,54 @@ class Calendario_Salidas_De_Campo(models.Model):
         Cadena para representar el objeto en el sitio de Admin
         """
         return '%s (%s - %s)' % (self.zona, self.fecha_inicio, self.fecha_fin)
+
+
+# class Reporte(models.Model):
+#     """
+#     Una clase que define el modelo del reporte
+#     """
+
+#     # Campos
+#     id = models.AutoField(primary_key=True)
+#     hospital = models.CharField(
+#         max_length=200, help_text="Ingrese el nombre del Hospital")
+#     municipio = models.ForeignKey(
+#         'Municipio', on_delete=models.SET_NULL, null=True, blank=True)
+#     fecha = models.DateField(
+#         max_length=2000, blank=True, null=True)
+#     equipos_promocion = models.IntegerField(blank=True, null=True)
+#     medicina_promocion = models.IntegerField(blank=True, null=True)
+#     enfermeria_promocion = models.IntegerField(blank=True, null=True)
+#     auxiliar_enfermeria_promocion = models.IntegerField(blank=True, null=True)
+#     psicologia_promocion = models.IntegerField(blank=True, null=True)
+#     tecnico_ambiental_promocion = models.IntegerField(blank=True, null=True)
+#     odontologia_promocion = models.IntegerField(blank=True, null=True)
+#     nutricionista_promocion = models.IntegerField(blank=True, null=True)
+#     salud_laboral_promocion = models.IntegerField(blank=True, null=True)
+#     personas_promocion = models.IntegerField(blank=True, null=True)
+#     viviendas_promocion = models.IntegerField(blank=True, null=True)
+#     reporte_vigilancia_promocion = models.IntegerField(blank=True, null=True)
+#     canalizacion_interconsulta_promocion = models.IntegerField(blank=True, null=True)
+#     canalizacion_rias_promocion = models.IntegerField(blank=True, null=True)
+#     canalizacion_intersectorial_promocion = models.IntegerField(blank=True, null=True)
+#     canalizacion_total_promocion = models.IntegerField(blank=True, null=True)
+
+
+#     # Metadata
+
+#     class Meta:
+#         ordering = ["-fecha_inicio"]
+
+#     # Métodos
+#     def get_absolute_url(self):
+#         """
+#         Devuelve la url para acceder a una instancia particular de MyModelName.
+#         """
+#         return reverse('calendario_salidas_de_campo_detail', args=[str(self.id)])
+
+#     # Nombre
+#     def __str__(self):
+#         """
+#         Cadena para representar el objeto en el sitio de Admin
+#         """
+#         return '%s (%s - %s)' % (self.zona, self.fecha_inicio, self.fecha_fin)
