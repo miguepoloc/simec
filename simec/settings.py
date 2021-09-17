@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'apps.equipo',
     'apps.personal',
     'apps.reporte',
+    'apps.familias',
 ]
 
 MIDDLEWARE = [

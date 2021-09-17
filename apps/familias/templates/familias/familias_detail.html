@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>{{ equipo.nombre }} | SIMEC</title>
+{% endblock title %}
+
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>{{ equipo.nombre }}</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'equipo' %}">Equipo</a></li>
+            <li class="breadcrumb-item active">{{ equipo.nombre }}</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="card card-solid">
+      <div class="card-body">
+        <div class="row">
+          <figure class="highcharts-figure">
+            <div id="container"></div>
+            <p class="highcharts-description" style="width: 100vw;">
+              Cada equipo atiende 2800 familias y cada auxiliar de enfermería 400 familias
+            </p>
+          </figure>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock content %}
+
+{% block script %}
+<script>
+  document.getElementById("equipos").classList.add('active');
+</script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/sankey.js"></script>
+<script src="https://code.highcharts.com/modules/organization.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+  Highcharts.chart('container', {
+    chart: {
+      height: 450,
+      inverted: true
+    },
+
+    title: {
+      text: 'Organización {{ equipo.nombre }}'
+    },
+
+    accessibility: {
+      point: {
+        descriptionFormatter: function (point) {
+          var nodeName = point.toNode.name,
+            nodeId = point.toNode.id,
+            nodeDesc = nodeName === nodeId ? nodeName : nodeName + ', ' + nodeId,
+            parentDesc = point.fromNode.id;
+          return point.index + '. ' + nodeDesc + ', reports to ' + parentDesc + '.';
+        }
+      }
+    },
+
+    series: [{
+      type: 'organization',
+      name: '{{ equipo.nombre }}',
+      keys: ['from', 'to'],
+      data: [
+        ['Medico', 'EnfermeroJefe'],
+        ['Medico', 'TecnicoAmbiental'],
+        ['Medico', 'Psicologo'],
+        ['EnfermeroJefe', 'Enfermero1'],
+        ['EnfermeroJefe', 'Enfermero2'],
+        ['EnfermeroJefe', 'Enfermero3'],
+        ['EnfermeroJefe', 'Enfermero4'],
+        ['EnfermeroJefe', 'Enfermero5'],
+        ['EnfermeroJefe', 'Enfermero6'],
+        ['EnfermeroJefe', 'Enfermero7'],
+
+      ],
+      levels: [{
+        level: 0,
+        height: 25
+      }, {
+        level: 1,
+        color: '#4185B3',
+      }, {
+        level: 2,
+        color: '#ff6010'
+      }, {
+        level: 3,
+        color: '#ff6010'
+      },
+      ],
+      nodes: [{
+        id: 'Medico',
+        title: 'Médico',
+        name: '{{ equipo.medico }}',
+        color: '#48BAB8',
+        image: "{% static 'img/user-md-solid.svg' %}"
+      }, {
+        id: 'EnfermeroJefe',
+        title: 'Enfermero Jefe',
+        name: '{{ equipo.enfermero_jefe }}',
+        image: "{% static 'img/nurse.svg' %}"
+      }, {
+        id: 'Enfermero1',
+        title: 'Auxiliar enfermería',
+        name: '{{ equipo.auxiliar_enfermeria_1 }}',
+        image: "{% static 'img/circulo-cruz.svg' %}"
+      }, {
+        id: 'Enfermero2',
+        title: 'Auxiliar enfermería',
+        name: '{{ equipo.auxiliar_enfermeria_2 }}',
+        image: "{% static 'img/circulo-cruz.svg' %}"
+      }, {
+        id: 'Enfermero3',
+        title: 'Auxiliar enfermería',
+        name: '{{ equipo.auxiliar_enfermeria_3 }}',
+        image: "{% static 'img/circulo-cruz.svg' %}"
+      }, {
+        id: 'Enfermero4',
+        title: 'Auxiliar enfermería',
+        name: '{{ equipo.auxiliar_enfermeria_4 }}',
+        image: "{% static 'img/circulo-cruz.svg' %}",
+        level: 3
+      }, {
+        id: 'Enfermero5',
+        title: 'Auxiliar enfermería',
+        name: '{{ equipo.auxiliar_enfermeria_5 }}',
+        image: "{% static 'img/circulo-cruz.svg' %}",
+        level: 3
+      }, {
+        id: 'Enfermero6',
+        title: 'Auxiliar enfermería',
+        name: '{{ equipo.auxiliar_enfermeria_6 }}',
+        image: "{% static 'img/circulo-cruz.svg' %}",
+        level: 3
+      }, {
+        id: 'Enfermero7',
+        title: 'Auxiliar enfermería',
+        name: '{{ equipo.auxiliar_enfermeria_7 }}',
+        image: "{% static 'img/circulo-cruz.svg' %}"
+      }, {
+        id: 'TecnicoAmbiental',
+        title: 'Técnico Ambiental',
+        name: '{{ equipo.tecnico_ambiental }}',
+        image: "{% static 'img/mano-agua.svg' %}"
+      }, {
+        id: 'Psicologo',
+        title: 'Psicólogo',
+        name: '{{ equipo.psicologo }}',
+        image: "{% static 'img/help.svg' %}"
+      }],
+      colorByPoint: false,
+      color: '#007ad0',
+      dataLabels: {
+        color: 'white'
+      },
+      borderColor: 'white',
+      nodeWidth: 75,
+      nodePadding: 10
+    }],
+    tooltip: {
+      outside: true,
+      borderColor: "#ff6010"
+    },
+    exporting: {
+      allowHTML: true,
+      sourceWidth: 800,
+      sourceHeight: 600
+    }
+
+  });
+
+</script>
+{% endblock script %}
