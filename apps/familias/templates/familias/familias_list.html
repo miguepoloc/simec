@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-<title>Equipos | SIMEC</title>
+<title>Familias | SIMEC</title>
 {% endblock title %}
 
 {% block content %}
@@ -12,12 +12,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Equipos</h1>
+          <h1>Familias</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
-            <li class="breadcrumb-item active">Equipos</li>
+            <li class="breadcrumb-item active">Familias</li>
           </ol>
         </div>
       </div>
@@ -28,27 +28,24 @@
   <section class="content">
 
     <!-- Default box -->
-    {% if equipo_list %}
+    {% if familias_list %}
     <div class="card-body pb-0">
       <div class="row d-flex align-items-stretch">
         <!-- Nombrar componentes  -->
-        {% for equipo in equipo_list %}
+        {% for familias in familias_list %}
         <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
           <div class="card bg-light">
             <div class="card-header text-muted border-bottom-0">
-              <h2 class="lead"><b>{{ equipo.nombre }}</b></h2>
+              <h2 class="lead"><b>{{ familias.nombre }}</b></h2>
             </div>
             <div class="card-body pt-0">
               <div class="row">
                 <div class="col-7">
-                  <p class="text-muted text-sm"><b>Cargo: </b>{{ equipo.cargo }}</p>
+                  <p class="text-muted text-sm"><b>Cargo: </b>{{ familias.cargo }}</p>
                 </div>
                 <div class="col-5 text-center">
-                  <a href="/static/img/logo.png" data-toggle="lightbox"
-                    data-title="Logo"
-                    data-gallery="Logo">
-                    <img src="/static/img/logo.png"
-                      alt="Logo" class="img-fluid">
+                  <a href="/static/img/logo.png" data-toggle="lightbox" data-title="Logo" data-gallery="Logo">
+                    <img src="/static/img/logo.png" alt="Logo" class="img-fluid">
                   </a>
                 </div>
 
@@ -56,7 +53,7 @@
             </div>
             <div class="card-footer">
               <div class="text-right">
-                <a href="{{ equipo.get_absolute_url }}" class="btn btn-sm btn-primary">
+                <a href="{{ familias.get_absolute_url }}" class="btn btn-sm btn-primary">
                   <i class="fas fa-info-circle"></i> Ver más
                 </a>
               </div>
@@ -97,7 +94,7 @@
       </div>
     </div>
     {% else %}
-    <p>No hay componentes</p>
+    <p>No hay Familias</p>
     {% endif %}
 
 
@@ -109,6 +106,6 @@
 {% endblock content %}
 {% block script %}
 <script>
-  document.getElementById("equipos").classList.add('active');
+  document.getElementById("familias").classList.add('active');
 </script>
 {% endblock script %}

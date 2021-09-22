@@ -69,3 +69,9 @@ class Calendario_Salidas_De_CampoViewSet(viewsets.ModelViewSet):
 
     queryset = Calendario_Salidas_De_Campo.objects.all().order_by('-fecha_inicio')
     serializer_class = Calendario_Salidas_De_CampoSerializer
+
+
+class Datos_ViviendaViewSet(viewsets.ModelViewSet):
+
+    queryset = Datos_Vivienda.objects.all().order_by('-nro_ficha')
+    serializer_class = Datos_ViviendaSerializer

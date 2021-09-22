@@ -66,3 +66,9 @@ class Calendario_Salidas_De_CampoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Calendario_Salidas_De_Campo
         fields = '__all__'
+
+
+class Datos_ViviendaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Datos_Vivienda
+        fields = '__all__'

@@ -356,3 +356,103 @@ class Calendario_Salidas_De_Campo(models.Model):
 #         Cadena para representar el objeto en el sitio de Admin
 #         """
 #         return '%s (%s - %s)' % (self.zona, self.fecha_inicio, self.fecha_fin)
+
+
+class Datos_Vivienda(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    nro_ficha = models.BigIntegerField(primary_key=True)
+    municipio = models.CharField(max_length=100, blank=True, null=True)
+    direccion = models.CharField(max_length=100, blank=True, null=True)
+    cordenadas = models.CharField(max_length=100, blank=True, null=True)
+    nombre = models.CharField(max_length=100, blank=True, null=True)
+    tide = models.CharField(max_length=100, blank=True, null=True)
+    identif = models.BigIntegerField(blank=True, null=True)
+    fnac = models.DateField(max_length=2000, blank=True, null=True)
+    celular = models.BigIntegerField(blank=True, null=True)
+    telefono = models.BigIntegerField(blank=True, null=True)
+    tipov = models.CharField(max_length=100, blank=True, null=True)
+    instviivi = models.CharField(max_length=100, blank=True, null=True)
+    instotro = models.CharField(max_length=100, blank=True, null=True)
+    personas = models.IntegerField(blank=True, null=True)
+    habitaciones = models.IntegerField(blank=True, null=True)
+    perros = models.IntegerField(blank=True, null=True)
+    gatos = models.IntegerField(blank=True, null=True)
+    otras_mascotas = models.IntegerField(blank=True, null=True)
+    det_mascotas = models.IntegerField(blank=True, null=True)
+    pvacuna = models.IntegerField(blank=True, null=True)
+    gvacuna = models.IntegerField(blank=True, null=True)
+    bovino = models.IntegerField(blank=True, null=True)
+    caprino = models.IntegerField(blank=True, null=True)
+    ovino = models.IntegerField(blank=True, null=True)
+    porcino = models.IntegerField(blank=True, null=True)
+    equino = models.IntegerField(blank=True, null=True)
+    menores = models.IntegerField(blank=True, null=True)
+    exoticos = models.IntegerField(blank=True, null=True)
+    otros_animales = models.IntegerField(blank=True, null=True)
+    det_animales = models.IntegerField(blank=True, null=True)
+    ev01 = models.CharField(max_length=100, blank=True, null=True)
+    ev02 = models.CharField(max_length=100, blank=True, null=True)
+    ev03 = models.CharField(max_length=100, blank=True, null=True)
+    ev04 = models.CharField(max_length=100, blank=True, null=True)
+    ev05 = models.CharField(max_length=100, blank=True, null=True)
+    ev06 = models.CharField(max_length=100, blank=True, null=True)
+    ev07 = models.CharField(max_length=100, blank=True, null=True)
+    ev08 = models.CharField(max_length=100, blank=True, null=True)
+    ca01 = models.CharField(max_length=100, blank=True, null=True)
+    ca02 = models.CharField(max_length=100, blank=True, null=True)
+    ca03 = models.CharField(max_length=100, blank=True, null=True)
+    ca04 = models.CharField(max_length=100, blank=True, null=True)
+    ma01 = models.CharField(max_length=100, blank=True, null=True)
+    ma02 = models.CharField(max_length=100, blank=True, null=True)
+    ma03 = models.CharField(max_length=100, blank=True, null=True)
+    rs01 = models.CharField(max_length=100, blank=True, null=True)
+    rs02 = models.CharField(max_length=100, blank=True, null=True)
+    rs03 = models.CharField(max_length=100, blank=True, null=True)
+    rs04 = models.CharField(max_length=100, blank=True, null=True)
+    rs05 = models.CharField(max_length=100, blank=True, null=True)
+    rs06 = models.CharField(max_length=100, blank=True, null=True)
+    rs07 = models.CharField(max_length=100, blank=True, null=True)
+    mp01 = models.CharField(max_length=100, blank=True, null=True)
+    mp02 = models.CharField(max_length=100, blank=True, null=True)
+    mp03 = models.CharField(max_length=100, blank=True, null=True)
+    ah01 = models.CharField(max_length=100, blank=True, null=True)
+    ah02 = models.CharField(max_length=100, blank=True, null=True)
+    ah03 = models.CharField(max_length=100, blank=True, null=True)
+    ah04 = models.CharField(max_length=100, blank=True, null=True)
+    ah05 = models.CharField(max_length=100, blank=True, null=True)
+    cr01 = models.CharField(max_length=100, blank=True, null=True)
+    cr02 = models.CharField(max_length=100, blank=True, null=True)
+    cr03 = models.CharField(max_length=100, blank=True, null=True)
+    cr04 = models.CharField(max_length=100, blank=True, null=True)
+    cr05 = models.CharField(max_length=100, blank=True, null=True)
+    cr06 = models.CharField(max_length=100, blank=True, null=True)
+    cr07 = models.CharField(max_length=100, blank=True, null=True)
+    cr08 = models.CharField(max_length=100, blank=True, null=True)
+    nm01 = models.CharField(max_length=100, blank=True, null=True)
+    nm02 = models.CharField(max_length=100, blank=True, null=True)
+    nm03 = models.CharField(max_length=100, blank=True, null=True)
+    nm04 = models.CharField(max_length=100, blank=True, null=True)
+    nm05 = models.CharField(max_length=100, blank=True, null=True)
+    subsidio = models.CharField(max_length=100, blank=True, null=True)
+    nombresub = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+    class Meta:
+        ordering = ["-nro_ficha"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('familias_detail', args=[str(self.nro_ficha)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s (%s)' % (self.nombre, self.nro_ficha)

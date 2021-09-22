@@ -20,6 +20,8 @@ router.register(r'Salida_De_Campo',
                 views.Salidas_De_CampoViewSet, "Salida_De_Campo")
 router.register(r'Calendario_Salida_De_Campo',
                 views.Calendario_Salidas_De_CampoViewSet, "Calendario_Salida_De_Campo")
+router.register(r'Datos_Vivienda',
+                views.Datos_ViviendaViewSet, "Datos_Vivienda")
 
 
 urlpatterns = [
