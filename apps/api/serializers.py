@@ -72,3 +72,15 @@ class Datos_ViviendaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Datos_Vivienda
         fields = '__all__'
+
+
+class Datos_IntegranteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Datos_Integrante
+        fields = '__all__'
+
+
+class Datos_RiesgoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Datos_Riesgo
+        fields = '__all__'

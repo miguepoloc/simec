@@ -75,3 +75,15 @@ class Datos_ViviendaViewSet(viewsets.ModelViewSet):
 
     queryset = Datos_Vivienda.objects.all().order_by('-nro_ficha')
     serializer_class = Datos_ViviendaSerializer
+
+
+class Datos_IntegranteViewSet(viewsets.ModelViewSet):
+
+    queryset = Datos_Integrante.objects.all().order_by('-identif')
+    serializer_class = Datos_IntegranteSerializer
+
+
+class Datos_RiesgoViewSet(viewsets.ModelViewSet):
+
+    queryset = Datos_Riesgo.objects.all().order_by('-identif')
+    serializer_class = Datos_RiesgoSerializer

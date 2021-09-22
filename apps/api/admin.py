@@ -13,3 +13,6 @@ admin.site.register(Personal)
 admin.site.register(Equipo)
 admin.site.register(Calendario_Salidas_De_Campo)
 admin.site.register(Datos_Vivienda)
+admin.site.register(Datos_Integrante)
+admin.site.register(Datos_Riesgo)
+

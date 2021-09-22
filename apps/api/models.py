@@ -456,3 +456,81 @@ class Datos_Vivienda(models.Model):
         Cadena para representar el objeto en el sitio de Admin
         """
         return '%s (%s)' % (self.nombre, self.nro_ficha)
+
+
+class Datos_Integrante(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    nombre = models.CharField(max_length=100, blank=True, null=True)
+    tipoid = models.CharField(max_length=100, blank=True, null=True)
+    identif = models.BigIntegerField(primary_key=True)
+    fnac = models.DateField(max_length=2000, blank=True, null=True)
+    paren = models.CharField(max_length=100, blank=True, null=True)
+    sx = models.CharField(max_length=100, blank=True, null=True)
+    gen = models.CharField(max_length=100, blank=True, null=True)
+    osex = models.CharField(max_length=100, blank=True, null=True)
+    ecivil = models.CharField(max_length=100, blank=True, null=True)
+    ocup = models.CharField(max_length=100, blank=True, null=True)
+    disc = models.CharField(max_length=100, blank=True, null=True)
+    etnia = models.CharField(max_length=100, blank=True, null=True)
+    victima = models.CharField(max_length=100, blank=True, null=True)
+    sgss = models.CharField(max_length=100, blank=True, null=True)
+    afi = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+    class Meta:
+        ordering = ["-identif"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('integrante_detail', args=[str(self.identif)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s (%s)' % (self.nombre, self.identif)
+
+
+class Datos_Riesgo(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    identif = models.BigIntegerField(primary_key=True)
+    op01 = models.CharField(max_length=100, blank=True, null=True)
+    op02 = models.CharField(max_length=100, blank=True, null=True)
+    op03 = models.CharField(max_length=100, blank=True, null=True)
+    op04 = models.CharField(max_length=100, blank=True, null=True)
+    op05 = models.CharField(max_length=100, blank=True, null=True)
+    op06 = models.CharField(max_length=100, blank=True, null=True)
+    op07 = models.CharField(max_length=100, blank=True, null=True)
+    op08 = models.CharField(max_length=100, blank=True, null=True)
+    op09 = models.CharField(max_length=100, blank=True, null=True)
+    op10 = models.CharField(max_length=100, blank=True, null=True)
+    op11 = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-identif"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('integrante_detail', args=[str(self.identif)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.identif)
