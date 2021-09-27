@@ -1,1 +1,1 @@
-web: gunicorn remo.wsgi --log-file -
+web: gunicorn simec.wsgi --log-file -
