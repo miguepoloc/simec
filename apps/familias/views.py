@@ -23,6 +23,5 @@ class FamiliasDetailView(generic.DetailView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        # context['salida_de_campo_list'] = Salidas_De_Campo.objects.filter(sensor=self.kwargs['pk'])
         context['salida_de_campo_list'] = Salidas_De_Campo.objects.all()
         return context
