@@ -530,7 +530,7 @@ class Datos_Riesgo(models.Model):
         """
         Devuelve la url para acceder a una instancia particular de MyModelName.
         """
-        return reverse('integrante_detail', args=[str(self.identif)])
+        return reverse('riesgo_detail', args=[str(self.identif)])
 
     # Nombre
     def __str__(self):

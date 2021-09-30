@@ -39,11 +39,11 @@ class FamiliasDetailView(generic.DetailView):
 
 class DatosIntegranteDetailView(generic.DetailView):
     model = Datos_Integrante
-    template_name = 'familias/datos_integrante_detail.html'
+    template_name = 'familias/integrante_detail.html'
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        # context['datos_integrante_list'] = Datos_Integrante.objects.all()
+        context['datos_riesgo_list'] = Datos_Riesgo.objects.all()
         return context

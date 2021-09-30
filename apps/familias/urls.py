@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)$', views.FamiliasDetailView.as_view(),
         name='familias_detail'),
     url(r'^integrante/(?P<pk>\d+)$', views.DatosIntegranteDetailView.as_view(),
-        name='datos_integrante_detail'),
+        name='integrante_detail'),
 ]
