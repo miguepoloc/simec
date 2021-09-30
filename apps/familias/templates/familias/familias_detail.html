@@ -19,7 +19,7 @@
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
             <li class="breadcrumb-item"><a href="{% url 'familias' %}">Familia</a></li>
-            <li class="breadcrumb-item active">{{ datos_vivienda.nro_ficha }}</li>
+            <li class="breadcrumb-item active">{{ datos_vivienda.nombre }}</li>
           </ol>
         </div>
       </div>
@@ -30,24 +30,28 @@
   <section class="content">
 
     <!-- Default box -->
-    {% if datos_vivienda %}
+    {% if datos_integrante_list %}
     <div class="card-body pb-0">
       <div class="row d-flex align-items-stretch">
         <!-- Nombrar componentes  -->
-        {% for familias in familias_list %}
+        {% for datos_integrante in datos_integrante_list %}
+        {% if datos_integrante.vivienda.nro_ficha == datos_vivienda.nro_ficha %}
         <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
           <div class="card bg-light">
             <div class="card-header text-muted border-bottom-0">
-              <h2 class="lead"><b>{{ familias.nombre }}</b></h2>
+              <h2 class="lead"><b>{{ datos_integrante.nombre }}</b></h2>
             </div>
             <div class="card-body pt-0">
               <div class="row">
                 <div class="col-7">
-                  <p class="text-muted text-sm"><b>Cargo: </b>{{ familias.cargo }}</p>
+                  <p class="text-muted text-sm"><b>Parentesco: </b>{{ datos_integrante.paren }}</p>
+                  <p class="text-muted text-sm"><b>Identificación: </b>{{ datos_integrante.identif }}</p>
+                  <p class="text-muted text-sm"><b>Afiliación: </b>{{ datos_integrante.sgss }}</p>
+
                 </div>
                 <div class="col-5 text-center">
-                  <a href="/static/img/logo.png" data-toggle="lightbox" data-title="Logo" data-gallery="Logo">
-                    <img src="/static/img/logo.png" alt="Logo" class="img-fluid">
+                  <a href="/static/img/familia/{{ datos_integrante.paren }}.svg" data-toggle="lightbox" data-title="Logo" data-gallery="Logo">
+                    <img src="/static/img/familia/{{ datos_integrante.paren }}.svg" alt="Logo" class="img-fluid">
                   </a>
                 </div>
 
@@ -62,6 +66,7 @@
             </div>
           </div>
         </div>
+        {% endif %}
         {% endfor %}
         {% if is_paginated %}
         <div class="container">

@@ -463,9 +463,11 @@ class Datos_Integrante(models.Model):
     Una clase que define el modelo de las salidas de campo
     """
     # Campos
+    identif = models.BigIntegerField(primary_key=True)
+    vivienda =  models.ForeignKey(
+        'Datos_Vivienda', on_delete=models.SET_NULL, null=True, blank=True)
     nombre = models.CharField(max_length=100, blank=True, null=True)
     tipoid = models.CharField(max_length=100, blank=True, null=True)
-    identif = models.BigIntegerField(primary_key=True)
     fnac = models.DateField(max_length=2000, blank=True, null=True)
     paren = models.CharField(max_length=100, blank=True, null=True)
     sx = models.CharField(max_length=100, blank=True, null=True)
@@ -503,7 +505,9 @@ class Datos_Riesgo(models.Model):
     Una clase que define el modelo de las salidas de campo
     """
     # Campos
-    identif = models.BigIntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
+    identif = models.ForeignKey(
+        'Datos_Integrante', on_delete=models.SET_NULL, null=True, blank=True)
     op01 = models.CharField(max_length=100, blank=True, null=True)
     op02 = models.CharField(max_length=100, blank=True, null=True)
     op03 = models.CharField(max_length=100, blank=True, null=True)
