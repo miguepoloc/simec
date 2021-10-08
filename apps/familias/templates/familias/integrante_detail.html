@@ -18,6 +18,7 @@
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
             <li class="breadcrumb-item"><a href="{% url 'familias' %}">Familias</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'familias' %}">{{ datos_vivienda.nombre }}</a></li>
             <li class="breadcrumb-item active">{{ datos_integrante.nombre }}</li>
           </ol>
         </div>
@@ -93,7 +94,7 @@
                 <a class="nav-item nav-link active" id="descripcion-tab" data-toggle="tab" href="#descripcion"
                   role="tab" aria-controls="descripcion" aria-selected="true">Descripcion</a>
                 <a class="nav-item nav-link" id="timeline-tab" data-toggle="tab" href="#timeline" role="tab"
-                  aria-controls="timeline" aria-selected="false">Salidas de campo</a>
+                  aria-controls="timeline" aria-selected="false">Plan de acción</a>
               </div>
             </nav>
             <div class="tab-content p-3 mx-auto" id="nav-tabContent">
