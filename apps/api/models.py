@@ -64,49 +64,41 @@ class Departamento(models.Model):
         return self.nombre_departamento
 
 
-class Municipio(models.Model):
+class MUNICIPIOS(models.Model):
     """
     Una clase que define el modelo de los municipios
     """
     # Campos
-    codigo_municipio = models.IntegerField(primary_key=True)
-    nombre_municipio = models.CharField(max_length=100)
-    departamento = models.ForeignKey(
-        'Departamento', on_delete=models.SET_NULL, null=True, blank=True)
-    tipo_municipio = models.ForeignKey(
-        'Tipo_Municipio', on_delete=models.SET_NULL, null=True, blank=True)
+    CODIGO = models.IntegerField(primary_key=True)
+    MUNICIPIO = models.CharField(max_length=100)
 
     # Metadata
     class Meta:
-        ordering = ["codigo_municipio"]
+        ordering = ["CODIGO"]
 
     # Métodos
     def get_absolute_url(self):
         """
         Devuelve la url para acceder a una instancia particular de MyModelName.
         """
-        return reverse('municipio_detail', args=[str(self.codigo_municipio)])
+        return reverse('municipio_detail', args=[str(self.CODIGO)])
 
     def __str__(self):
         """
         Cadena para representar el objeto en el sitio de Admin
         """
-        return self.nombre_municipio
+        return self.MUNICIPIO
 
 
-class Centro_Poblado(models.Model):
+class CENTROS_POBLADOS(models.Model):
     """
     Una clase que define el modelo de los municipios
     """
     # Campos
     codigo_centro_poblado = models.IntegerField(primary_key=True)
-    nombre_centro_poblado = models.CharField(max_length=100)
-    municipio = models.ForeignKey(
-        'Municipio', on_delete=models.SET_NULL, null=True, blank=True)
-    departamento = models.ForeignKey(
-        'Departamento', on_delete=models.SET_NULL, null=True, blank=True)
-    tipo_centro_poblado = models.ForeignKey(
-        'Tipo_Centro_Poblado', on_delete=models.SET_NULL, null=True, blank=True)
+    COD_MUNICIPIO = models.IntegerField()
+    CODIGO = models.IntegerField()
+    CENTRO_POBLADO = models.CharField(max_length=100)
 
     # Metadata
     class Meta:
@@ -123,7 +115,7 @@ class Centro_Poblado(models.Model):
         """
         Cadena para representar el objeto en el sitio de Admin
         """
-        return self.nombre_centro_poblado
+        return self.CENTRO_POBLADO
 
 
 class Zona(models.Model):
@@ -307,55 +299,648 @@ class Calendario_Salidas_De_Campo(models.Model):
         return '%s (%s - %s)' % (self.zona, self.fecha_inicio, self.fecha_fin)
 
 
-# class Reporte(models.Model):
-#     """
-#     Una clase que define el modelo del reporte
-#     """
+class PARENEZCOS(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    CODIGO = models.AutoField(primary_key=True)
+    PARENTEXCO = models.CharField(max_length=100, blank=True, null=True)
 
-#     # Campos
-#     id = models.AutoField(primary_key=True)
-#     hospital = models.CharField(
-#         max_length=200, help_text="Ingrese el nombre del Hospital")
-#     municipio = models.ForeignKey(
-#         'Municipio', on_delete=models.SET_NULL, null=True, blank=True)
-#     fecha = models.DateField(
-#         max_length=2000, blank=True, null=True)
-#     equipos_promocion = models.IntegerField(blank=True, null=True)
-#     medicina_promocion = models.IntegerField(blank=True, null=True)
-#     enfermeria_promocion = models.IntegerField(blank=True, null=True)
-#     auxiliar_enfermeria_promocion = models.IntegerField(blank=True, null=True)
-#     psicologia_promocion = models.IntegerField(blank=True, null=True)
-#     tecnico_ambiental_promocion = models.IntegerField(blank=True, null=True)
-#     odontologia_promocion = models.IntegerField(blank=True, null=True)
-#     nutricionista_promocion = models.IntegerField(blank=True, null=True)
-#     salud_laboral_promocion = models.IntegerField(blank=True, null=True)
-#     personas_promocion = models.IntegerField(blank=True, null=True)
-#     viviendas_promocion = models.IntegerField(blank=True, null=True)
-#     reporte_vigilancia_promocion = models.IntegerField(blank=True, null=True)
-#     canalizacion_interconsulta_promocion = models.IntegerField(blank=True, null=True)
-#     canalizacion_rias_promocion = models.IntegerField(blank=True, null=True)
-#     canalizacion_intersectorial_promocion = models.IntegerField(blank=True, null=True)
-#     canalizacion_total_promocion = models.IntegerField(blank=True, null=True)
+    # Metadata
+
+    class Meta:
+        ordering = ["-CODIGO"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.CODIGO)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.PARENTEXCO)
 
 
-#     # Metadata
+class TIPOS_VIVIENDA(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    CODIGO = models.AutoField(primary_key=True)
+    TIPO = models.CharField(max_length=100, blank=True, null=True)
 
-#     class Meta:
-#         ordering = ["-fecha_inicio"]
+    # Metadata
 
-#     # Métodos
-#     def get_absolute_url(self):
-#         """
-#         Devuelve la url para acceder a una instancia particular de MyModelName.
-#         """
-#         return reverse('calendario_salidas_de_campo_detail', args=[str(self.id)])
+    class Meta:
+        ordering = ["-CODIGO"]
 
-#     # Nombre
-#     def __str__(self):
-#         """
-#         Cadena para representar el objeto en el sitio de Admin
-#         """
-#         return '%s (%s - %s)' % (self.zona, self.fecha_inicio, self.fecha_fin)
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.CODIGO)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.TIPO)
+
+
+class Sexo(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.CharField(max_length=100, primary_key=True)
+    DETALLE = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class Genero(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.CharField(max_length=100, primary_key=True)
+    DETALLE = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class Orientacion_Sexual(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.CharField(max_length=100, primary_key=True)
+    DETALLE = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class Estado_Civil(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.CharField(max_length=100, primary_key=True)
+    DETALLE = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class Ocupacion(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.CharField(max_length=100, primary_key=True)
+    DETALLE = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class Discapacidad(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.CharField(max_length=100, primary_key=True)
+    DETALLE = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class Grupo_Etnico(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.CharField(max_length=100, primary_key=True)
+    DETALLE = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class Hecho_Victimizante(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.CharField(max_length=100, primary_key=True)
+    DETALLE = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class Vinculacion_SGSSS(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.CharField(max_length=100, primary_key=True)
+    DETALLE = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class Tipo_Afiliacion(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.CharField(max_length=100, primary_key=True)
+    DETALLE = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class ESCOLARIDAD(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.IntegerField(primary_key=True)
+    DETALLE = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class RAZON_DE_ABANDONO_ESCOLAR(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.IntegerField(primary_key=True)
+    DETALLE = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class DISCAPACIDAD2(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.IntegerField(primary_key=True)
+    DETALLE = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class RIESGOS_PSICOSOCIALES(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.IntegerField(primary_key=True)
+    DETALLE = models.CharField(max_length=100, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class RIESGO_PARA_LA_INFANCIA(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.IntegerField(primary_key=True)
+    DETALLE = models.CharField(max_length=500, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class ATENCION_A_MUJER(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.IntegerField(primary_key=True)
+    DETALLE = models.CharField(max_length=500, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class GESTANTES(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.IntegerField(primary_key=True)
+    DETALLE = models.CharField(max_length=500, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class ADULTO(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.IntegerField(primary_key=True)
+    DETALLE = models.CharField(max_length=500, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class INFECCIOSAS(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.IntegerField(primary_key=True)
+    DETALLE = models.CharField(max_length=500, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class SALUD_ORAL(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.IntegerField(primary_key=True)
+    DETALLE = models.CharField(max_length=500, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
+
+
+class SEGURIDAD_ALIMENTARIA_Y_NUTRICIONAL(models.Model):
+    """
+    Una clase que define el modelo de las salidas de campo
+    """
+    # Campos
+    COD = models.IntegerField(primary_key=True)
+    DETALLE = models.CharField(max_length=500, blank=True, null=True)
+
+    # Metadata
+
+    class Meta:
+        ordering = ["-COD"]
+
+    # Métodos
+    def get_absolute_url(self):
+        """
+        Devuelve la url para acceder a una instancia particular de MyModelName.
+        """
+        return reverse('riesgo_detail', args=[str(self.COD)])
+
+    # Nombre
+    def __str__(self):
+        """
+        Cadena para representar el objeto en el sitio de Admin
+        """
+        return '%s' % (self.DETALLE)
 
 
 class Datos_Vivienda(models.Model):
@@ -464,7 +1049,7 @@ class Datos_Integrante(models.Model):
     """
     # Campos
     identif = models.BigIntegerField(primary_key=True)
-    vivienda =  models.ForeignKey(
+    vivienda = models.ForeignKey(
         'Datos_Vivienda', on_delete=models.SET_NULL, null=True, blank=True)
     nombre = models.CharField(max_length=100, blank=True, null=True)
     tipoid = models.CharField(max_length=100, blank=True, null=True)
